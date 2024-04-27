@@ -118,6 +118,14 @@ fn next_plate_cc(send : &Sender<Message>, rcv: &Receiver<()>, config: &mut Confi
 pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a plate, decompose it by adding squares, then select the next plate if the plates change
     // if filling the plate with a square does not make the height greater than the size, add the square and then next plate
     //exprintln!("decomposing, config: {}, plate_id: {}, net_squares: {}", config, plate_id, config.net_squares);
+    if plate_id > 0 && plate_id < config.plates.len() - 2 {
+        let glass_depth = std::cmp::min(config.plates[plate_id-1].height - config.plates[plate_id].height, config.plates[plate_id+1].height-config.plates[plate_id].height);
+        let glasses: [i32; 19] = [0, 1, 2, 4, 5, 7, 8, 12, 12, 16, 15, 20, 24, 26, 25, 30, 28, 38, 34];
+        if config.plates[plate_id].width < 9 && glasses[config.plates[plate_id].width as usize] < glass_depth {
+            // println!("decomposing GLASS, config: {}, plate_id: {}, net_squares: {} w={} glass_depth={}", config, plate_id, config.net_squares, config.plates[plate_id].width, glass_depth);
+            return
+        }
+    } 
 
     if config.has_no(config.plates[plate_id].width) && config.plates[plate_id].height + config.plates[plate_id].width <= config.size &&  (if plate_id == config.plates.len()-2 {config.plates[plate_id].width >= 5} else {true}){
         config.net_squares += 1;
@@ -136,6 +144,7 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
         ////eprintln!("a.");
     }
     // if the height separating the plate from the one to it's left is less than the length, extend the left plate horizontally by adding the square
+    let mut min_for_corner = 2;
     if config.plates[plate_id - 1].height - config.plates[plate_id].height < config.plates[plate_id].width && config.has_no(config.plates[plate_id - 1].height - config.plates[plate_id].height) {
         config.net_squares += 1;
         //eprintln!("b+ {}", config);
@@ -153,12 +162,16 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
     }
     else{
         //////eprintln!("b.");
+        let corner_to_box: [i32; 21] = [0, 1, 2, 3, 3, 3, 4, 4, 5, 5, 5, 5, 5, 6, 7, 7, 7, 7, 7, 7, 8];
+        let corner_size = std::cmp::min(config.plates[plate_id - 1].height - config.plates[plate_id].height, config.plates[plate_id].width);
+        min_for_corner = if corner_size < 21 { corner_to_box[corner_size as usize] } else { 8 };
     }
     // iterate over all possible square sizes that can be added to the bottom left corner.
     //println!("{} to {}", 2, std::cmp::min(config.plates[plate_id].width - 1, config.size - config.plates[plate_id].height) + 1);
 
-    let min = if (config.plates[plate_id].height == 0 || plate_id == 1) {5} else {2};
-
+    // let min = if (config.plates[plate_id].height == 0 || plate_id == 1) {5} else {2};
+    let min = if (config.plates[plate_id].height == 0 || plate_id == 1) {std::cmp::max(5, min_for_corner)} else {min_for_corner};
+    
     for s in min..(std::cmp::min(config.plates[plate_id].width - 1, config.size - config.plates[plate_id].height)+1) {
         // if the square can be added to the bottom left corner, add it and then decompose the new plate)
         if config.has_no(s) && s != config.plates[plate_id-1].height - config.plates[plate_id].height{
@@ -179,6 +192,7 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
         }
         else{
             ////eprintln!("{} is not a valid square size", s)
+            // println!("min_for_corner={} ", min_for_corner);        
         }
     }
 
