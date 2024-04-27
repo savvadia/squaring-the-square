@@ -24,6 +24,7 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
     //println!("Number of threads: {}", NTHREADS);
     //create an hashmap that contains tuples of threads and senders:
     let mut threads: HashMap<usize, Integer> = HashMap::new();
+    let mut size_start_time: [std::time::Instant; 256] = [std::time::Instant::now(); 256]; // Initialize with default values
 
     //queue:
     let mut queue: Vec<(Config, usize)> = Vec::new();
@@ -32,10 +33,9 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
     let mut f = File::options().append(true).open("timings-".to_owned() + &min_size.to_string()+ " to " + &max_size.to_string() + ".txt").unwrap();
 
     while size <= max_size{
-        println!("{} start {}", size, (std::time::Instant::now() - start).as_millis());
-        writeln!(&mut f, "{} start {}", size, (std::time::Instant::now() - start).as_millis()).unwrap();
-
-
+        size_start_time[size as usize] = std::time::Instant::now();
+        println!("{} start {}", size, (size_start_time[size as usize] - start).as_millis());
+        writeln!(&mut f, "{} start {}", size, (size_start_time[size as usize] - start).as_millis()).unwrap();
     
         //random number generator:
         let mut rng = rand::thread_rng();
@@ -66,8 +66,8 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
                 threads.remove(&index);
                 if s < size {
                     if !threads.values().any(|&val| val == s){
-                        writeln!(&mut f, "{} end {}", s, (std::time::Instant::now() - start).as_millis()).unwrap();
-                        println!("{} end {}", s, (std::time::Instant::now() - start).as_millis());
+                        writeln!(&mut f, "{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis()).unwrap();
+                        println!("{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis());
                     }
                     else{
                         //println!("TODO threads still working on size {}", s);
@@ -93,8 +93,8 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
                     threads.remove(&index);
                     if s < size {
                         if !threads.values().any(|&val| val == s){
-                            writeln!(&mut f, "{} end {}", s, (std::time::Instant::now() - start).as_millis()).unwrap();
-                            println!("{} end {}", s, (std::time::Instant::now() - start).as_millis());
+                            writeln!(&mut f, "{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis()).unwrap();
+                            println!("{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis());
                         }
                         else{
                             //println!("TODO threads still working on size {}", s);
@@ -195,8 +195,8 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
                         threads.remove(&index);
                         if s < size {
                             if !threads.values().any(|&val| val == s){
-                                writeln!(&mut f, "{} end {}", s, (std::time::Instant::now() - start).as_millis()).unwrap();
-                                println!("{} end {}", s, (std::time::Instant::now() - start).as_millis());
+                                writeln!(&mut f, "{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis()).unwrap();
+                                println!("{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis());
                             }
                             else{
                                 //println!("TODO threads still working on size {}", s);
@@ -221,8 +221,8 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
                             threads.remove(&index);
                             if s < size {
                                 if !threads.values().any(|&val| val == s){
-                                    writeln!(&mut f, "{} end {}", s, (std::time::Instant::now() - start).as_millis()).unwrap();
-                                    println!("{} end {}", s, (std::time::Instant::now() - start).as_millis());
+                                    writeln!(&mut f, "{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis()).unwrap();
+                                    println!("{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis());
                                 }
                                 else{
                                     //println!("TODO threads still working on size {}", s);
@@ -254,8 +254,8 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
                         let s = threads.get(&index).unwrap().clone();
                         threads.remove(&index);
                         if !threads.values().any(|&val| val == s){
-                            writeln!(&mut f, "{} end {}", s, (std::time::Instant::now() - start).as_millis()).unwrap();
-                            println!("{} end {}", s, (std::time::Instant::now() - start).as_millis());
+                            writeln!(&mut f, "{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis()).unwrap();
+                            println!("{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis());
                         }
                         else{
                             //println!("TODO threads still working on size {}", s);
