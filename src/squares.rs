@@ -10,11 +10,12 @@ pub struct Config {
     pub squares: [bool; 256],
     pub size: Integer,
     pub plates: Vec<Plate>,
-    pub net_squares: u128
+    pub net_squares: u128,
+    pub max_glass: [i32; 256]
 }
 
 impl Config{
-    pub fn new(size: Integer) -> Self {
+    pub fn new(size: Integer, max_glass: [i32; 256]) -> Self {
         let mut s = [false; 256];
         let mut p = Vec::new();
         //First plate: height size + 1, width 1
@@ -27,7 +28,8 @@ impl Config{
             squares: s,
             size: size,
             plates: p,
-            net_squares: 0
+            net_squares: 0,
+            max_glass: max_glass
         }
     }
 
@@ -35,7 +37,7 @@ impl Config{
         self.plates.len()
     }
 
-    pub fn has_no(&self, square: Integer) -> bool {
+    pub fn can_use(&self, square: Integer) -> bool {
         !self.squares[square as usize]
     }
 
@@ -46,7 +48,8 @@ impl Config{
         self.plates.insert(plate_id, Plate{height: square + original_plate_height, width: square});
         //take the width of the square from the original plate
         self.plates[plate_id + 1].width -= square;
-        //////eprintln!("c+ {}", self);
+        // eprintln!("c+ {}", self);
+        // println!("c+ {}", self);
     }
 
     pub fn horizontal_extension(&mut self, plate_id: usize) -> () { //extends the plate on the left by adding a square
@@ -55,6 +58,7 @@ impl Config{
         self.plates[plate_id - 1].width += square;
         self.plates[plate_id].width -= square;
         ////eprintln!("b+ {}", self);
+        // println!("h+ {}", self);
     }
 
     pub fn reverse_horizontal_extension(&mut self, plate_id: usize) -> () { //remove extension
@@ -63,6 +67,7 @@ impl Config{
         self.plates[plate_id - 1].width -= square;
         self.plates[plate_id].width += square;
         ////eprintln!("b- {}", self);
+        // println!("h- {}", self);
     }
 
     pub fn vertical_extension(&mut self,  plate_id: usize) -> () {
@@ -80,6 +85,7 @@ impl Config{
             self.plates.remove(plate_id);
         }   
         ////eprintln!("a+ {}", self);
+        // println!("v+ {}", self);
     }     
 
     pub fn remove_square(&mut self, plate_id: usize) -> () {
@@ -89,9 +95,33 @@ impl Config{
         self.plates.remove(plate_id);
         self.plates[plate_id].width += square;
         ////eprintln!("c- {}", self);
+        // println!("c- {}", self);
 
     }
-    
+
+    pub fn add_square_quick_right(&mut self, square: Integer, plate_id: usize) -> () {
+        //add_square without merge checks.
+        self.squares[square as usize] = true;
+        let original_plate_height = self.plates[plate_id].height;
+        self.plates.insert(plate_id+1, Plate{height: square + original_plate_height, width: square});
+        //take the width of the square from the original plate
+        self.plates[plate_id].width -= square;
+        // eprintln!("c+ {}", self);
+        // println!("c+ {}", self);
+    }
+
+    pub fn remove_square_right(&mut self, plate_id: usize) -> () {
+        //remove_square, which makes it's entire own plate, and merges with the next plate
+        let square = self.plates[plate_id].width;
+        self.squares[square as usize] = false;
+        self.plates.remove(plate_id);
+        self.plates[plate_id-1].width += square;
+        ////eprintln!("c- {}", self);
+        // println!("c- {}", self);
+
+    }
+
+
     pub fn print_squares(&self) -> () {
         let mut s = String::new();
         s += "{";
@@ -118,8 +148,11 @@ impl Config{
             }
         }
         //remove last two elements in squares_out:
-        s.pop();
-        s.pop();
+        if s.len()>2 {
+            s.pop();
+            s.pop();
+        }
+
         s += "}";
         s
     }
@@ -145,8 +178,11 @@ impl Debug for Config{
             }
         }
         //remove last two elements in squares_out:
-        squares_out.pop();
-        squares_out.pop();
+
+        if squares_out.len() > 2 {
+            squares_out.pop();
+            squares_out.pop();
+        }
         squares_out += "}";
 
         write!(f, "Config: size: {}, squares: {:?}, plates: {:?}", self.size, squares_out, self.plates)
@@ -163,8 +199,10 @@ impl Display for Config{
             }
         }
         //remove last two elements in squares_out:
-        squares_out.pop();
-        squares_out.pop();
+        if squares_out.len() > 2 {
+            squares_out.pop();
+            squares_out.pop();
+        }
         squares_out += "}";
 
         write!(f, "Config: size: {}, squares: {:?}, plates: {:?}", self.size, squares_out, self.plates)

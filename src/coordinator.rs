@@ -14,7 +14,7 @@ pub enum Message {
     WorkUnit((Config, usize)),
 }
 
-pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
+pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass: &[i32; 256]) -> u128{
     let start = std::time::Instant::now();
     let mut size = min_size;
     let mut total_squares = 0;
@@ -39,12 +39,14 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
     
         //random number generator:
         let mut rng = rand::thread_rng();
+
+        let max_glass_cloned = *max_glass;
     
         //create the first thread:
         let to_co = to_coord.clone();
         let new_thread = thread::spawn(move || {
             //let start = std::time::Instant::now();
-            solve_cc( &to_co, size);
+            solve_cc( &to_co, size, max_glass_cloned);
             //let end = std::time::Instant::now();
             //println!("Time elapsed: {}ms", (end - start).as_millis());
             //println!("Thread {} disconnecting...", i);
@@ -214,7 +216,7 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
                     //println!("Message recieved: {:?}", received);
                     match received {
                         Message::ThreadDeath(index, squares_placed) => {
-                            //println!("Thread {} disconnected", index);
+                            println!("Thread {} disconnected", index);
                             //println!("Threads {:?}", threads);
                             total_squares += squares_placed;
                             let s = threads.get(&index).unwrap().clone();
@@ -230,11 +232,11 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
                             }
                             //println!("Number of threads: {}, work units: {}", threads.len(), queue.len());
                         },
-                        /*Message::WorkUnit(unit) => {
+                        Message::WorkUnit(unit) => {
                             //add to queue:
                             queue.push(unit);
                             println!("Work unit recieved, queue length: {}", queue.len());
-                        }*/
+                        }
                         _ => {
                             println!("Message recieved: unknown");
                         }
@@ -276,7 +278,7 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer) -> u128{
     total_squares
 }
 
-pub fn SingleSizeCoordinator(size : Integer) -> (u128) {
+pub fn SingleSizeCoordinator(size : Integer, max_glass: &[i32; 256]) -> (u128) {
 
     let start = std::time::Instant::now();
     let (to_coord, rcv_coord) = channel();
@@ -295,11 +297,13 @@ pub fn SingleSizeCoordinator(size : Integer) -> (u128) {
     //random number generator:
     let mut rng = rand::thread_rng();
 
+    let max_glass_cloned = *max_glass;
+
     //create the first thread:
     let to_co = to_coord.clone();
     let new_thread = thread::spawn(move || {
         //let start = std::time::Instant::now();
-        solve_cc( &to_co,  size);
+        solve_cc( &to_co,  size, max_glass_cloned);
         //let end = std::time::Instant::now();
         //println!("Time elapsed: {}ms", (end - start).as_millis());
         //println!("Thread {} disconnecting...", i);

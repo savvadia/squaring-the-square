@@ -11,6 +11,7 @@ pub fn concurrency_main(){
     //create multiple threads, each with a sender to the coordinator, and also each with a receiver from the coordinator
     let (to_coord, rcv_coord) = channel();
     let NTHREADS = available_parallelism().unwrap().get();
+    let max_glass_dummy: [i32; 256] = [0; 256];
     println!("Number of threads: {}", NTHREADS);
     //create an hashmap that contains tuples of threads and senders:
     let mut threads: HashMap<usize, (thread::JoinHandle<()>, std::sync::mpsc::Sender<usize>)> = HashMap::new();
@@ -29,7 +30,7 @@ pub fn concurrency_main(){
                     //wait
                     //println!("Thread {} got: {}", i, received);
                     println!("Thread {} sending to coord: {}", i, j);
-                    to_co.send(Message::WorkUnit(Config::new(1))).unwrap();
+                    to_co.send(Message::WorkUnit(Config::new(1, max_glass_dummy))).unwrap();
                 }
                 thread::sleep(Duration::from_millis(20 + i as u64 * 10));
                 j+= 1;
@@ -38,7 +39,7 @@ pub fn concurrency_main(){
                 //wait
                 //println!("Thread {} got: {}", i, received);
                 println!("Work unit produced: {}", i);
-                to_co.send(Message::WorkUnit(Config::new(1))).unwrap();
+                to_co.send(Message::WorkUnit(Config::new(1, max_glass_dummy))).unwrap();
             }
             //send exit message to coordinator
             to_co.send(Message::KillThread(i)).unwrap();

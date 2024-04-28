@@ -13,8 +13,11 @@ fn main() {
     let mut file = File::create("OUTPUT.txt").unwrap();
     let start = std::time::Instant::now();
     let mut squares_placed = 0;
+    // 50 reaches 152
+    // 63 reaches glass size of 220. that's enough for our needs
+    let MAX_GLASS_READ_ONLY: [i32; 256] = exhaustive::solve_glasses(50); 
 
-    squares_placed = coordinator::coordinator_continuous(0, 150);
+    squares_placed = coordinator::coordinator_continuous(0, 150, &MAX_GLASS_READ_ONLY);
 
     /* 
      for s in 80..86 {
