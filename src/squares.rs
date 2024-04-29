@@ -70,8 +70,10 @@ impl Config{
         // println!("h- {}", self);
     }
 
-    pub fn vertical_extension(&mut self,  plate_id: usize) -> () {
+    // returns new plate id
+    pub fn vertical_extension(&mut self,  plate_id: usize) -> usize {
         let square = self.plates[plate_id].width;
+        let mut new_plate_id = plate_id;
         self.squares[square as usize] = true;
         self.plates[plate_id].height += square;
         if self.plates[plate_id].height == self.plates[plate_id + 1].height {
@@ -83,9 +85,35 @@ impl Config{
             //merge the two plates:
             self.plates[plate_id - 1].width += self.plates[plate_id].width;
             self.plates.remove(plate_id);
-        }   
+            new_plate_id = plate_id - 1;
+        }
         ////eprintln!("a+ {}", self);
-        // println!("v+ {}", self);
+        // println!("v+ {} {}", square, self);
+        return new_plate_id;
+    }     
+
+    pub fn reverse_vertical_extension(&mut self,  mut plate_id: usize, square: Integer, orig_left_plate_width: Integer) -> () {
+        self.squares[square as usize] = false;
+        let mut plate_width = self.plates[plate_id].width;
+        let plate_height = self.plates[plate_id].height;
+        // println!("v- start {} plate: {} orig_left={} {}", square, plate_id, orig_left_plate_width, self);
+
+        if orig_left_plate_width > 0 {
+            // height will be adjusted below
+            self.plates.insert(plate_id+1, Plate{height: plate_height, width: square});
+            self.plates[plate_id].width = orig_left_plate_width;
+            plate_id += 1;
+            plate_width -= orig_left_plate_width;
+            // println!("v- left {} {}", square, self);
+        }
+        if plate_width > square {
+            self.plates.insert(plate_id+1, Plate{height: plate_height, width: plate_width - square});
+            self.plates[plate_id].width = square;
+            // println!("v- right {} {}", square, self);
+        }
+        self.plates[plate_id].height -= square;
+
+        // println!("v- {} {}", square, self);
     }     
 
     pub fn remove_square(&mut self, plate_id: usize) -> () {

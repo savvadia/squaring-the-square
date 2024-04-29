@@ -221,20 +221,8 @@ pub fn decompose_glasses(mut config: &mut Config, plate_id: usize, check_glass_s
         //eprintln!("b- {}", config);
 
     }
-    else if check_glass_size > 0 {
-        //////eprintln!("b.");
-        // let corner_to_box: [i32; 21] = [0, 1, 2, 3, 3, 3, 4, 4, 5, 5, 5, 5, 5, 6, 7, 7, 7, 7, 7, 7, 8];
-        // let corner_size = std::cmp::min(config.plates[plate_id - 1].height - config.plates[plate_id].height, config.plates[plate_id].width);
-        // min_for_corner = if corner_size < 21 { corner_to_box[corner_size as usize] } else { 8 };
-    }
-    // iterate over all possible square sizes that can be added to the bottom left corner.
-    //println!("{} to {}", 2, std::cmp::min(config.plates[plate_id].width - 1, config.size - config.plates[plate_id].height) + 1);
 
-    // let min = if (config.plates[plate_id].height == 0 || plate_id == 1) {5} else {2};
-    // let min = if (config.plates[plate_id].height == 0 || plate_id == 1) {std::cmp::max(5, min_for_corner)} else {min_for_corner};
-    let min = min_for_corner;
-    // println!("min_for_corner={} ", min_for_corner); 
-    for s in min..(std::cmp::min(config.plates[plate_id].width - 1, config.size - config.plates[plate_id].height)+1) {
+    for s in 1..(std::cmp::min(config.plates[plate_id].width - 1, config.size - config.plates[plate_id].height)+1) {
         // if the square can be added to the bottom left corner, add it and then decompose the new plate)
         if config.can_use(s) && s != config.plates[plate_id-1].height - config.plates[plate_id].height{
             config.net_squares += 1;
@@ -248,7 +236,6 @@ pub fn decompose_glasses(mut config: &mut Config, plate_id: usize, check_glass_s
         }
         else{
             ////eprintln!("{} is not a valid square size", s)
-            // println!("min_for_corner={} ", min_for_corner);        
         }
     }
 
@@ -277,23 +264,25 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
         }
     } 
 
-    if config.can_use(config.plates[plate_id].width) && 
-       config.plates[plate_id].height + config.plates[plate_id].width <= config.size
+    let square = config.plates[plate_id].width;
+    if config.can_use(square) && 
+       config.plates[plate_id].height + square <= config.size
         // &&  
-    //    (if plate_id == config.plates.len()-2 {config.plates[plate_id].width >= 5} else {true})
+    //    (if plate_id == config.plates.len()-2 {square >= 5} else {true})
        {
         config.net_squares += 1;
-        //eprintln!("a+ {}", config);
-        
-        let mut config_backup = config.clone();
-        config.vertical_extension(plate_id);
+        let orig_left_plate_width = config.plates[plate_id - 1].width;
+        let new_plate_id = config.vertical_extension(plate_id);
         //println!("{:?}", config);
         next_plate(&mut config);
         //undo it
-        config_backup.net_squares = config.net_squares;
-        // println!("v-");
-        *config = config_backup;
-        
+        if new_plate_id == plate_id {
+            // we were potentially merging with right plate only
+            config.reverse_vertical_extension(plate_id, square, 0);
+        } else {
+            // we were mergeing with left plate and potentially with right plate
+            config.reverse_vertical_extension(new_plate_id, square, orig_left_plate_width);
+        }
     }
     else{
         ////eprintln!("a.");

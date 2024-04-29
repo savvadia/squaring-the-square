@@ -52,16 +52,16 @@ pub fn concurrency_main(){
     while threads.len() > 0 {
         //count threads:
         //vec of workunits:
-        println!("Number of threads: {}", threads.len());
+        // println!("Number of threads: {}", threads.len());
         for received in rcv_coord.try_iter() {
             match received {
                 Message::KillThread(index) => {
-                    println!("Thread {} disconnected", index);
+                    // println!("Thread {} disconnected", index);
                     threads.remove(&index);
                 },
                 Message::WorkUnit(config) => {
                     i+=1;
-                    println!("work unit recieved");
+                    // println!("work unit recieved");
                     workunits.push(config);
                 }
             }
@@ -77,7 +77,7 @@ pub fn concurrency_main(){
                         match threads.get(&t).unwrap().1.send(0){
                             //if err, remove from threads, else do nothing
                             Err(_) => {
-                                println!("Thread {} disconnected", t);
+                                // println!("Thread {} disconnected", t);
                                 threads.remove(&t);
                             },
                             _ => {
@@ -93,11 +93,11 @@ pub fn concurrency_main(){
                 for received in rcv_coord.try_iter() {
                     match received {
                         Message::KillThread(index) => {
-                            println!("Thread {} disconnected", index);
+                            // println!("Thread {} disconnected", index);
                             threads.remove(&index);
                         },
                         Message::WorkUnit(config) => {
-                            println!("work unit recieved");
+                            // println!("work unit recieved");
                             workunits.push(config);
         
                         }

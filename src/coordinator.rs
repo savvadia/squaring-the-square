@@ -216,7 +216,7 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass:
                     //println!("Message recieved: {:?}", received);
                     match received {
                         Message::ThreadDeath(index, squares_placed) => {
-                            println!("Thread {} disconnected", index);
+                            // println!("Thread {} disconnected", index);
                             //println!("Threads {:?}", threads);
                             total_squares += squares_placed;
                             let s = threads.get(&index).unwrap().clone();
