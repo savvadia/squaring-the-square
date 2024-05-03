@@ -14,7 +14,7 @@ pub enum Message {
     WorkUnit((Config, usize)),
 }
 
-pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass: &[i32; 256]) -> u128{
+pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass: &[i32; 256], max_square_for_glass: &[i32; 256]) -> u128{
     let start = std::time::Instant::now();
     let mut size = min_size;
     let mut total_squares = 0;
@@ -41,15 +41,16 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass:
         let mut rng = rand::thread_rng();
 
         let max_glass_cloned = *max_glass;
+        let max_square_for_glass_cloned = *max_square_for_glass;
     
         //create the first thread:
         let to_co = to_coord.clone();
         let new_thread = thread::spawn(move || {
             //let start = std::time::Instant::now();
-            solve_cc( &to_co, size, max_glass_cloned);
+            solve_cc( &to_co, size, max_glass_cloned, max_square_for_glass_cloned);
             //let end = std::time::Instant::now();
             //println!("Time elapsed: {}ms", (end - start).as_millis());
-            //println!("Thread {} disconnecting...", i);
+            // println!("Thread {} disconnecting...", i);
             to_co.send(Message::ThreadDeath(i, 0)).unwrap();
         });
         threads.insert(i, size);
@@ -91,18 +92,24 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass:
                 Message::ThreadDeath(index, squares_placed) => {
                     //println!("Thread {} disconnected", index);
                     //println!("Threads {:?}", threads);
-                    let s = threads.get(&index).unwrap().clone();
-                    threads.remove(&index);
-                    if s < size {
-                        if !threads.values().any(|&val| val == s){
-                            writeln!(&mut f, "{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis()).unwrap();
-                            println!("{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis());
+                    let fetched_thread = threads.get(&index);
+                    if fetched_thread == None {
+                        println!("ERROR [96]: got Message::ThreadDeath with index {} and squares_placed: {}", index, squares_placed)
+                    } else {
+                        let s = fetched_thread.unwrap().clone();
+                        // println!("ThreadDeath for thread {} removing it", index);
+                        threads.remove(&index);
+                        if s < size {
+                            if !threads.values().any(|&val| val == s){
+                                writeln!(&mut f, "{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis()).unwrap();
+                                println!("{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis());
+                            }
+                            else{
+                                //println!("TODO threads still working on size {}", s);
+                            }
                         }
-                        else{
-                            //println!("TODO threads still working on size {}", s);
+                        total_squares += squares_placed;
                         }
-                    }
-                    total_squares += squares_placed;
                     //println!("Number of threads: {}, work units: {}", threads.len(), queue.len());
                 },
                 Message::WorkUnit(unit) => {
@@ -140,7 +147,7 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass:
                                 decompose(&mut config, plate_id);
                                 //let end = std::time::Instant::now();
                                 //println!("Time elapsed: {}ms", (end - start).as_millis());
-                                //println!("Thread {} disconnecting...", i);
+                                // println!("Thread {} disconnecting...", i);
                                 to_co.send(Message::ThreadDeath(i, config.net_squares)).unwrap();
                             });
                             i += 1;
@@ -218,24 +225,30 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass:
                         Message::ThreadDeath(index, squares_placed) => {
                             // println!("Thread {} disconnected", index);
                             //println!("Threads {:?}", threads);
-                            total_squares += squares_placed;
-                            let s = threads.get(&index).unwrap().clone();
-                            threads.remove(&index);
-                            if s < size {
-                                if !threads.values().any(|&val| val == s){
-                                    writeln!(&mut f, "{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis()).unwrap();
-                                    println!("{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis());
+                            let fetched_thread = threads.get(&index);
+                            if fetched_thread == None {
+                                println!("ERROR [228]: got Message::ThreadDeath with index {} and squares_placed: {}", index, squares_placed)
+                            } else {
+                                let s = fetched_thread.unwrap().clone();
+
+                                total_squares += squares_placed;
+                                threads.remove(&index);
+                                if s < size {
+                                    if !threads.values().any(|&val| val == s){
+                                        writeln!(&mut f, "{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis()).unwrap();
+                                        println!("{} end {} -> {}", s, (std::time::Instant::now() - start).as_millis(), (std::time::Instant::now() - size_start_time[s as usize]).as_millis());
+                                    }
+                                    else{
+                                        //println!("TODO threads still working on size {}", s);
+                                    }
                                 }
-                                else{
-                                    //println!("TODO threads still working on size {}", s);
-                                }
-                            }
-                            //println!("Number of threads: {}, work units: {}", threads.len(), queue.len());
+                                //println!("Number of threads: {}, work units: {}", threads.len(), queue.len());
+                        }
                         },
                         Message::WorkUnit(unit) => {
                             //add to queue:
                             queue.push(unit);
-                            println!("Work unit recieved, queue length: {}", queue.len());
+                            // println!("Work unit recieved, queue length: {}", queue.len());
                         }
                         _ => {
                             println!("Message recieved: unknown");
@@ -278,7 +291,7 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass:
     total_squares
 }
 
-pub fn SingleSizeCoordinator(size : Integer, max_glass: &[i32; 256]) -> (u128) {
+pub fn SingleSizeCoordinator(size : Integer, max_glass: &[i32; 256], max_square_for_glass: &[i32; 256]) -> (u128) {
 
     let start = std::time::Instant::now();
     let (to_coord, rcv_coord) = channel();
@@ -298,15 +311,16 @@ pub fn SingleSizeCoordinator(size : Integer, max_glass: &[i32; 256]) -> (u128) {
     let mut rng = rand::thread_rng();
 
     let max_glass_cloned = *max_glass;
+    let max_square_for_glass_cloned = *max_glass;
 
     //create the first thread:
     let to_co = to_coord.clone();
     let new_thread = thread::spawn(move || {
         //let start = std::time::Instant::now();
-        solve_cc( &to_co,  size, max_glass_cloned);
+        solve_cc( &to_co,  size, max_glass_cloned, max_square_for_glass_cloned);
         //let end = std::time::Instant::now();
         //println!("Time elapsed: {}ms", (end - start).as_millis());
-        //println!("Thread {} disconnecting...", i);
+        // println!("Thread {} disconnecting...", i);
         to_co.send(Message::ThreadDeath(i, 0)).unwrap();
     });
     threads.insert(i, new_thread);
@@ -374,6 +388,7 @@ pub fn SingleSizeCoordinator(size : Integer, max_glass: &[i32; 256]) -> (u128) {
                             decompose(&mut config, plate_id);
                             //let end = std::time::Instant::now();
                             //println!("Time elapsed: {}ms", (end - start).as_millis());
+                            println!("Thread {} disconnecting...", i);
                             to_co.send(Message::ThreadDeath(i, config.net_squares)).unwrap();
                         });
                         threads.insert(i, new_thread);

@@ -9,13 +9,15 @@ pub type Integer = i32;
 pub struct Config {
     pub squares: [bool; 256],
     pub size: Integer,
+    pub first_corner: Integer,
     pub plates: Vec<Plate>,
     pub net_squares: u128,
-    pub max_glass: [i32; 256]
+    pub max_glass: [i32; 256],
+    pub max_square_for_glass: [i32; 256]
 }
 
 impl Config{
-    pub fn new(size: Integer, max_glass: [i32; 256]) -> Self {
+    pub fn new(size: Integer, max_glass: [i32; 256], max_square_for_glass: [i32; 256]) -> Self {
         let mut s = [false; 256];
         let mut p = Vec::new();
         //First plate: height size + 1, width 1
@@ -27,9 +29,11 @@ impl Config{
         Self {
             squares: s,
             size: size,
+            first_corner: 0,
             plates: p,
             net_squares: 0,
-            max_glass: max_glass
+            max_glass: max_glass,
+            max_square_for_glass: max_square_for_glass
         }
     }
 
@@ -213,7 +217,7 @@ impl Debug for Config{
         }
         squares_out += "}";
 
-        write!(f, "Config: size: {}, squares: {:?}, plates: {:?}", self.size, squares_out, self.plates)
+        write!(f, "Config: size: {}, first: {}, squares: {:?}, plates: {:?}", self.size, self.first_corner, squares_out, self.plates)
     }
 }
 
@@ -233,7 +237,7 @@ impl Display for Config{
         }
         squares_out += "}";
 
-        write!(f, "Config: size: {}, squares: {:?}, plates: {:?}", self.size, squares_out, self.plates)
+        write!(f, "Config: size: {}, first: {} squares: {:?}, plates: {:?}", self.size, self.first_corner, squares_out, self.plates)
     }
 }
 

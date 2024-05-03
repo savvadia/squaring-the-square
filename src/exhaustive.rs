@@ -10,16 +10,16 @@ use std::fs::{self, File};
 
 
 
-pub fn solve (size: Integer, max_glass: [i32; 256]) -> (){
+pub fn solve (size: Integer, max_glass: [i32; 256], max_square_for_glass: [i32; 256]) -> (){
     //println!{"Solving for size: {}", size};
-    let mut config = Config::new(size, max_glass); //Creates the necessary starting plate.
+    let mut config = Config::new(size, max_glass, max_square_for_glass); //Creates the necessary starting plate.
     //println!("Config: {:?}", config);
     decompose(&mut config, 1);
 }
 
-pub fn solve_cc(send : &Sender<Message>, size: Integer, max_glass: [i32; 256]) ->(){
+pub fn solve_cc(send : &Sender<Message>, size: Integer, max_glass: [i32; 256], max_square_for_glass: [i32; 256]) ->(){
     //println!{"Solving for size: {}", size};
-    let mut config = Config::new(size, max_glass); //Creates the necessary starting plate.
+    let mut config = Config::new(size, max_glass, max_square_for_glass); //Creates the necessary starting plate.
     //println!("Config: {:?}", config);
     double_nest_init(send, &mut config);
     // init_bottom_corners(send, &mut config);
@@ -32,7 +32,7 @@ pub fn solve_glasses(max_glass: usize) -> ([i32; 256]) {
     for glass in 1..max_glass {
         let start = std::time::Instant::now();
         check_glass_size = glass as i32;
-        let mut config = Config::new(256, max_glass_precalc);
+        let mut config = Config::new(256, max_glass_precalc, max_glass_precalc);
         config.plates[1].width = glass as i32;
         config.plates[2].width = (256 - glass) as i32;
         let mut i = 1;
@@ -51,6 +51,32 @@ pub fn solve_glasses(max_glass: usize) -> ([i32; 256]) {
     return max_glass_precalc;
 }
 
+pub fn solve_glasses_wo_half(max_glass: usize) -> ([i32; 256]) {
+    let mut check_glass_size: i32 = 0;
+    let mut max_square_for_glass: [i32; 256] = [0; 256]; // rounddown(width/2)+1 is missing
+    for glass in 1..max_glass {
+        let start = std::time::Instant::now();
+        check_glass_size = glass as i32;
+        let mut config = Config::new(256, max_square_for_glass, max_square_for_glass);
+        config.plates[1].width = glass as i32;
+        config.plates[2].width = (256 - glass) as i32;
+        let mut i = 1;
+        config.net_squares = 2;
+        config.squares[(1) as usize] = true;
+        decompose_glasses(&mut config, 1, check_glass_size, &mut max_square_for_glass);
+        config.squares[(1) as usize] = false;
+        let finish = std::time::Instant::now();
+        println!("==>    Time for glasses wo half of size {} without {} : {} ms -> max glass {}", 
+            glass, glass/2+1, (finish - start).as_millis(), max_square_for_glass[glass]);
+    }
+
+    check_glass_size = 0;
+    for glass in max_glass..256 {
+        max_square_for_glass[glass] = 256;
+    }
+
+    return max_square_for_glass;
+}
 fn next_plate(config: &mut Config) -> () { //find smallest delimited plate, and decompose it
     let mut l_min : Integer = config.size + Integer::from(1); //equiv to infinity
     let mut p_min_i : usize = 0;
@@ -244,25 +270,38 @@ pub fn decompose_glasses(mut config: &mut Config, plate_id: usize, check_glass_s
 pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a plate, decompose it by adding squares, then select the next plate if the plates change
     // if filling the plate with a square does not make the height greater than the size, add the square and then next plate
     // println!("decomposing, config: {}, plate_id: {}, net_squares: {}", config, plate_id, config.net_squares);
-    if plate_id > 0 && plate_id < config.plates.len() - 1 {
-        let glass_depth = std::cmp::min(
-            config.plates[plate_id - 1].height - config.plates[plate_id].height,
-            config.plates[plate_id + 1].height - config.plates[plate_id].height,
-        );
-        let glass_width = config.plates[plate_id].width;
-        if config.max_glass[glass_width as usize] -
-           (if config.can_use(glass_width) {0} else {glass_width}) < glass_depth {
-            if glass_width > 35 {
-                println!(
-                    "skipping GLASS glass_depth={} w={} {}",
-                    glass_depth,
-                    config.plates[plate_id].width,
-                    if config.can_use(glass_width) {""} else {"(w used)"}
-                );
-                }
-            return;
-        }
+    if plate_id == 0 || plate_id == config.plates.len() - 1 {
+        println!("skipping plate {} out of {}", plate_id, config.plates.len())
     } 
+    let glass_depth = std::cmp::min(
+        config.plates[plate_id - 1].height - config.plates[plate_id].height,
+        config.plates[plate_id + 1].height - config.plates[plate_id].height,
+    );
+    let glass_width = config.plates[plate_id].width;
+    
+    if config.max_glass[glass_width as usize] -
+        (if config.can_use(glass_width) {0} else {glass_width}) < glass_depth {
+        // if glass_width > 15 {
+        //     println!(
+        //         "skipping GLASS glass_depth={} w={} {}",
+        //         glass_depth,
+        //         config.plates[plate_id].width,
+        //         if config.can_use(glass_width) {""} else {"(w used)"}
+        //     );
+        //     }
+        return;
+    }
+    // if config.can_use(glass_width) == false &&
+    // glass_width > 15 &&
+    // glass_depth > glass_width{
+        // println!(
+        //     "deep GLASS glass_depth={} w={} {} config: {}",
+        //     glass_depth,
+        //     config.plates[plate_id].width,
+        //     if config.can_use(glass_width) {""} else {"(w used)"},
+        //     config
+        // );
+    // }
 
     let square = config.plates[plate_id].width;
     if config.can_use(square) && 
@@ -270,40 +309,61 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
         // &&  
     //    (if plate_id == config.plates.len()-2 {square >= 5} else {true})
        {
-        config.net_squares += 1;
-        let orig_left_plate_width = config.plates[plate_id - 1].width;
-        let new_plate_id = config.vertical_extension(plate_id);
-        //println!("{:?}", config);
-        next_plate(&mut config);
-        //undo it
-        if new_plate_id == plate_id {
-            // we were potentially merging with right plate only
-            config.reverse_vertical_extension(plate_id, square, 0);
+        // the smallest corner block is on bottom left, the first square
+        // if we are trying to put the square in the bottom right corner, it must be greater than the first corner
+        if config.plates[plate_id].height == 0  &&  // bottom line
+             square < config.first_corner &&         // smaller than the first 
+             plate_id == config.plates.len() - 2 { // last plate
+                // println!("bottom line: SKIP vertical bottom right: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
+        // } 
+        // else if plate_id==1 &&                                                  // first plate
+        //      config.plates[plate_id].height + square == config.size &&     // touches the ceiling
+        //      square < config.first_corner  {                                // smaller than the first 
+        //         // println!("bottom line: SKIP vertical top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
+        // } else if plate_id==1 &&                                                  // first plate
+        //      config.plates[plate_id].height + square < config.size &&       // not touching ceiling
+        //      config.size - config.plates[plate_id].height - square < config.first_corner { // not leaving enough space
+        //         // println!("bottom line: SKIP vertical left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
         } else {
-            // we were mergeing with left plate and potentially with right plate
-            config.reverse_vertical_extension(new_plate_id, square, orig_left_plate_width);
+        
+        // if config.plates[plate_id].height > 0  ||  // bottom line
+        //    square > config.first_corner ||         // bigger than the first 
+        //    plate_id < config.plates.len() - 2      // the last plate on the row
+        //    {
+                config.net_squares += 1;
+                let orig_left_plate_width = config.plates[plate_id - 1].width;
+                let new_plate_id = config.vertical_extension(plate_id);
+                //println!("{:?}", config);
+                next_plate(&mut config);
+                //undo it
+                if new_plate_id == plate_id {
+                    // we were potentially merging with right plate only
+                    config.reverse_vertical_extension(plate_id, square, 0);
+                } else {
+                    // we were mergeing with left plate and potentially with right plate
+                    config.reverse_vertical_extension(new_plate_id, square, orig_left_plate_width);
+                }
+            }
         }
-    }
     else{
         ////eprintln!("a.");
     }
     // if the height separating the plate from the one to it's left is less than the length, extend the left plate horizontally by adding the square
     let mut min_for_corner = 1;
-    if config.plates[plate_id - 1].height - config.plates[plate_id].height < 
-       config.plates[plate_id].width && config.can_use(config.plates[plate_id - 1].height - config.plates[plate_id].height) {
-        config.net_squares += 1;
-        //eprintln!("b+ {}", config);
-        //let mut config_backup = config.clone();
+    let square = config.plates[plate_id - 1].height - config.plates[plate_id].height;
+    if square < config.plates[plate_id].width && config.can_use(square) {
+            config.net_squares += 1;
+            //eprintln!("b+ {}", config);
+            //let mut config_backup = config.clone();
 
-        config.horizontal_extension(plate_id);
-        //println!("{:?}", config);
-        decompose(config, plate_id);
-        //remove the square
-        config.reverse_horizontal_extension(plate_id);
-        //config_backup.net_squares = config.net_squares;
-        //*config = config_backup;
-        //eprintln!("b- {}", config);
-
+            config.horizontal_extension(plate_id);
+            //println!("{:?}", config);
+            decompose(config, plate_id);
+            //remove the square
+            config.reverse_horizontal_extension(plate_id);
+            //config_backup.net_squares = config.net_squares;
+            //*config = config_backup;
+            //eprintln!("b- {}", config);
     }
     else {
         //////eprintln!("b.");
@@ -317,16 +377,64 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
     // let min = if (config.plates[plate_id].height == 0 || plate_id == 1) {5} else {2};
     // let min = if (config.plates[plate_id].height == 0 || plate_id == 1) {std::cmp::max(5, min_for_corner)} else {min_for_corner};
     let min = min_for_corner;
-    // println!("min_for_corner={} ", min_for_corner); 
-    for s in min..(std::cmp::min(config.plates[plate_id].width - 1, config.size - config.plates[plate_id].height)+1) {
+    let mut max = std::cmp::min(config.plates[plate_id].width - 1, config.size - config.plates[plate_id].height)+1;
+    if config.plates[plate_id].height == 0 { 
+        if plate_id == config.plates.len() - 2 {
+            let with_space_for_corner = config.plates[plate_id].width - config.first_corner - 1 + 1; // -1 for bigger than first_corner; +1 to get max range
+            if with_space_for_corner < max {
+                // println!("bottom line: SKIP custom bottom right {}-{}: plate_id: {}, first={}, width: {}, config: {}, net_squares: {}", with_space_for_corner-1, max, plate_id, config.first_corner, config.plates[plate_id].width, config, config.net_squares);
+                max = with_space_for_corner;
+            }
+        }    
+    } else if plate_id == 1 {
+        let with_space_for_corner = (config.size - config.plates[plate_id].height) - config.first_corner - 1 + 1; // -1 for bigger than first_corner; +1 to get max range
+        if with_space_for_corner < max {
+            // println!("bottom line: SKIP custom left {}-{}: plate_id: {}, first={}, width: {}, config: {}, net_squares: {}", with_space_for_corner-1, max, plate_id, config.first_corner, config.plates[plate_id].width, config, config.net_squares);
+            max = with_space_for_corner;
+        }
+    }
+
+    // after adding a new square, we might get a new glass on the right
+    let right_height = config.plates[plate_id + 1].height - config.plates[plate_id].height;
+    let right_width = glass_width - (max-1);
+    if right_height >= glass_width {
+        // if config.max_square_for_glass[glass_width as usize] + 1 < max && glass_width > 5 {
+            // println!("SKIP GLASS custom glass {}-{}: plate_id: {}, glass width: {}, right_height: {}, max_for_glass: {}, config: {}, net_squares: {}", 
+            //     config.max_square_for_glass[glass_width as usize]+1, max-1, plate_id, glass_width, right_height, config.max_square_for_glass[glass_width as usize], config, config.net_squares);
+        // }
+        max = std::cmp::min(max, config.max_square_for_glass[glass_width as usize] + 1);
+    }
+
+    let right_height = config.plates[plate_id + 1].height - config.plates[plate_id].height;
+    for s in min..max {
         // if the square can be added to the bottom left corner, add it and then decompose the new plate)
-        if config.can_use(s) && s != config.plates[plate_id-1].height - config.plates[plate_id].height{
-            config.net_squares += 1;
-            config.add_square_quick(s, plate_id);
-            //println!("{:?}", config);
-            next_plate(&mut config);
-            config.remove_square(plate_id);
-            //println!("{} checked", s);
+        if config.can_use(s) && 
+           s != config.plates[plate_id-1].height - config.plates[plate_id].height {
+            let right_glass_width = glass_width - s;
+            let right_glass_height = std::cmp::min(s, right_height);
+            // s becomes the lowest wall of the new glass on the right of s square
+            if right_glass_height > config.max_glass[right_glass_width as usize] -
+                if config.can_use(right_glass_width) && s != right_glass_width {0} else {right_glass_width} {
+                    // if glass_width > 15 {
+                    //     println!("SKIP custom square {}: plate_id: {}, glass_width: {}, right_wall: {}, right_g_h: {}, right_g_w: {}, can_use({})={}, max_glass: {}, config: {}, net_squares: {}", 
+                    //         s, plate_id, glass_width, right_height, right_glass_height, right_glass_width, right_glass_width, config.can_use(right_glass_width), config.max_glass[right_glass_width as usize], config, config.net_squares);
+                    // }
+                } else {
+
+            // if we are trying to put the square in the bottom right corner, it must be greater than the first corner
+            // if config.plates[plate_id].height == 0  &&  // bottom line
+            // config.plates[plate_id].width - s <= config.first_corner && // leaving enough space for the square bigger than the first corner
+            // plate_id == config.plates.len() - 2      // the last plate on the row
+            // {
+            // } else {
+                    config.net_squares += 1;
+                    config.add_square_quick(s, plate_id);
+                    //println!("{:?}", config);
+                    next_plate(&mut config);
+                    config.remove_square(plate_id);
+                    //println!("{} checked", s);
+            // }
+                }
         }
         else{
             ////eprintln!("{} is not a valid square size", s)
@@ -474,15 +582,121 @@ pub fn double_nest_init(send: &Sender<Message>,  config: &mut Config) -> () {
     //let mut start: std::time::Instant = std::time::Instant::now();
     config.net_squares = 2;
     for s1 in (9..(config.plates[1].width/2+1)){
+        config.first_corner = s1;
+        config.add_square_quick(s1, 1);
+            // expect at least 3 squares on bottom line
+            for s2 in 5..((config.plates[2].width - 9) + 1){
+                if s2 != s1 {
+                    config.add_square_quick(s2, 2);
+                    if s2 > s1 && s1 < config.plates[3].width {
+                        if s2-s1 > config.max_glass[s1 as usize] {
+                            // println!("init_bottom_corners glass drop plane1  - send, size: {}, s1: {}, s2: {}, glass_width: {}", config.size, s1, s2, glass_width);
+                        } else {
+                            send.send(Message::WorkUnit((config.clone(), 1))).unwrap();
+                        }
+                        
+                    }
+                    else {
+                        if s2 > config.max_glass[(config.size - s1 - s2) as usize] {
+                            // println!("init_bottom_corners glass drop plane 3 - send, size: {}, s1: {}, s2: {}, glass_width: {}", config.size, s1, s2, glass_width);
+                        } else {
+                            send.send(Message::WorkUnit((config.clone(), 3))).unwrap();
+                        }
+                        
+                    }
+                    i+=1;
+                    config.remove_square(2);
+                }
+            }
+            //MY BOUND, to implement comment out 
+            /*
+            let s2 = config.plates[2].width;
+            if s2 != s1 {
+                let mut c = config.clone();
+                c.vertical_extension(2);
+                    if s1 > s2 {
+                        send.send(Message::WorkUnit((c, 2))).unwrap();
+                    }
+                    else{
+                        send.send(Message::WorkUnit((c, 1))).unwrap();
+                    }
+                    i+=1;
+            }*/
+            
+
+        config.remove_square(1);
+    }
+    //end time:
+    //println!("{} work units produced", i);
+    ////let end = std::time::Instant::now();
+    //println!("Time elapsed producing units: {}ms", (end - start).as_millis());
+}
+
+pub fn tripple_nest_init(send: &Sender<Message>,  config: &mut Config) -> () {
+    let mut i = 1;
+    //start time:
+    //let mut start: std::time::Instant = std::time::Instant::now();
+    config.net_squares = 2;
+    for s1 in (9..(config.plates[1].width/2+1)){
         config.add_square_quick(s1, 1);
             for s2 in 5..((config.plates[2].width - 9) + 1){
                 if s2 != s1 {
                     config.add_square_quick(s2, 2);
                         if s2 > s1 && s1 < config.plates[3].width {
-                            send.send(Message::WorkUnit((config.clone(), 1))).unwrap();
+                            let glass_width = s1;
+                            if glass_width > 0 && s2-s1 > config.max_glass[glass_width as usize] {
+                                // println!("init_bottom_corners glass drop plane1  - send, size: {}, s1: {}, s2: {}, glass_width: {}", config.size, s1, s2, glass_width);
+                            } else {
+                                send.send(Message::WorkUnit((config.clone(), 1))).unwrap();
+                            }
                         }
                         else {
-                            send.send(Message::WorkUnit((config.clone(), 3))).unwrap();
+                            let glass_width = config.plates[3].width;
+                            if glass_width > 0 && s2 > config.max_glass[glass_width as usize] {
+                                // println!("init_bottom_corners glass drop plane 3 - send, size: {}, s1: {}, s2: {}, glass_width: {}", config.size, s1, s2, glass_width);
+                            } else {
+                                for s3 in 5..config.plates[3].width {
+                                    if s3 == config.plates[3].width {
+                                        let new_plate = config.vertical_extension(3);
+                                        if s3 > s2 {
+                                            send.send(Message::WorkUnit((config.clone(), 2))).unwrap();
+                                        } else {
+                                            send.send(Message::WorkUnit((config.clone(), 3))).unwrap();
+                                        }
+                                        config.reverse_vertical_extension(3, s3, s2);
+                                    } else {
+                                        config.add_square_quick(s3, 3);
+                                        let glass_width = config.plates[4].width;
+                                        if s3 > config.max_glass[glass_width as usize] {
+                                            // println!("init_bottom_corners glass drop plane 4 - send, size: {}, s1: {}, s2: {}, glass_width: {}", config.size, s1, s2, glass_width);
+                                        } else if s3 > s1 {
+                                            let glass_width = s1 + s2;
+                                            let glass_height = s3 - s2;
+                                            if glass_height > config.max_glass[glass_width as usize] {
+                                                // println!("init_bottom_corners glass drop plane 1+2 - send, size: {}, s1: {}, s2: {}, glass_width: {}", config.size, s1, s2, glass_width);
+                                            } else {
+                                                if s3 > s2 {
+                                                    let glass_width = s2;
+                                                    let glass_height = std::cmp::min(s1,s3);
+                                                    if glass_height > config.max_glass[glass_width as usize] {
+                                                        // println!("init_bottom_corners glass drop plane 2 between 1/3 - send, size: {}, s1: {}, s2: {}, glass_width: {}", config.size, s1, s2, glass_width);
+                                                    } else {
+                                                        if s2 < config.plates[4].width {
+                                                            send.send(Message::WorkUnit((config.clone(), 2))).unwrap();
+                                                        } else {
+                                                            send.send(Message::WorkUnit((config.clone(), 4))).unwrap();
+
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        config.remove_square(3);
+                                    }
+                                }
+                                send.send(Message::WorkUnit((config.clone(), 3))).unwrap();
+                            }
+                            
                         }
                     i+=1;
                     config.remove_square(2);
@@ -512,22 +726,42 @@ pub fn double_nest_init(send: &Sender<Message>,  config: &mut Config) -> () {
     //println!("Time elapsed producing units: {}ms", (end - start).as_millis());
 }
 
-
-// pub fn init_bottom_corners(send: &Sender<Message>,  config: &mut Config) -> () {
-//     let mut i = 1;
-//     //start time:
-//     //let mut start: std::time::Instant = std::time::Instant::now();
-//     config.net_squares = 2;
-//     for s1 in (9..(config.size-8)){
-//         // println!("init_bottom_corners - start, config: {}, net_squares: {}", config, config.net_squares);
-//         config.add_square_quick(s1, 1);
-//         for s2 in 8..std::cmp::min(s1, config.plates[2].width){
-//                 config.add_square_quick_right(s2, 2);
-//                 println!("init_bottom_corners - send, config: {}, net_squares: {}", config, config.net_squares);
-//                 send.send(Message::WorkUnit((config.clone(), 2))).unwrap();
-//                 i+=1;
-//                 config.remove_square_right(3);
-//         }
-//         config.remove_square(1);
-//     }
-// }
+pub fn init_bottom_corners(send: &Sender<Message>,  config: &mut Config) -> () {
+    let mut i = 1;
+    config.net_squares = 2;
+    // println!("init_bottom_corners - START size: {}, config: {}, net_squares: {}", config.size, config, config.net_squares);
+    // 8 is min for s2, +1 to go to the boundary of size
+    for s1 in (9..(config.plates[1].width/2+1)){
+        // s1 is the smallest corner box
+        if s1+s1+1 > config.size {
+            continue
+        }
+        // println!("init_bottom_corners - start s1: {}, config: {}, net_squares: {}", s1, config, config.net_squares);
+        config.add_square_quick(s1, 1);
+        for s2 in (s1+1)..(config.plates[2].width+1){
+            let glass_width = config.size - s1 - s2;
+            if glass_width > 0 && s2 > config.max_glass[glass_width as usize] {
+                // println!("init_bottom_corners glass drop  - send, size: {}, s1: {}, s2: {}, glass_width: {}", config.size, s1, s2, glass_width);
+                continue
+            }
+            // println!("init_bottom_corners - start s1: {}, s2: {} config: {}, net_squares: {}", s1, s2, config, config.net_squares);
+            if s2 == config.plates[2].width {
+                let square = config.plates[2].width;
+                config.squares[square as usize] = true;
+                config.plates[2].height = square;
+                // println!("init_bottom_corners vertical     - send, config: {}, net_squares: {}, plate_id: 1 ", config, config.net_squares);
+                // s2 is always less than s1
+                send.send(Message::WorkUnit((config.clone(), 1))).unwrap();
+                config.squares[square as usize] = false;
+                config.plates[2].height = 0;
+            } else {
+                config.add_square_quick_right(s2, 2);
+                // println!("init_bottom_corners right corner - send, config: {}, net_squares: {}, plate_id: 2", config, config.net_squares);
+                send.send(Message::WorkUnit((config.clone(), 2))).unwrap();
+                i+=1;
+                config.remove_square_right(3);
+            }
+        }
+        config.remove_square(1);
+    }
+}

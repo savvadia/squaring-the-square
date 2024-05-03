@@ -16,8 +16,22 @@ fn main() {
     // 50 reaches 152
     // 63 reaches glass size of 220. that's enough for our needs
     let MAX_GLASS_READ_ONLY: [i32; 256] = exhaustive::solve_glasses(50); 
+    let mut max_square_for_glass: [i32; 256] =  [0; 256];
 
-    squares_placed = coordinator::coordinator_continuous(0, 150, &MAX_GLASS_READ_ONLY);
+    for s in 1..256 {
+        for g in (1..s).rev() {
+            // println!("GLASS s: {} max square g: {}, MAX_GLASS_READ_ONLY[(s - g) as usize]: {} ", s, g, (MAX_GLASS_READ_ONLY[(s - g) as usize]));
+            if g <= MAX_GLASS_READ_ONLY[(s - g) as usize] {
+                max_square_for_glass[s as usize] = g;
+                // if g > 25 {
+                    println!("max_square_for_glass square: {} max_square_for_glass: {}", s, g);
+                // }
+                break;
+            } 
+        }
+    }
+
+    squares_placed = coordinator::coordinator_continuous(1, 150, &MAX_GLASS_READ_ONLY, &max_square_for_glass);
 
     /* 
      for s in 80..86 {
