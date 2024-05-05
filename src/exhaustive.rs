@@ -386,12 +386,13 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                 max = with_space_for_corner;
             }
         }    
-    } else if plate_id == 1 {
-        let with_space_for_corner = (config.size - config.plates[plate_id].height) - config.first_corner - 1 + 1; // -1 for bigger than first_corner; +1 to get max range
-        if with_space_for_corner < max {
+        // we cannot filter out the top left corner by size as we do not know the width of the rectanle (we try to cover all sizes up to a square)
+    // } else if plate_id == 1 {
+    //     let with_space_for_corner = (config.size - config.plates[plate_id].height) - config.first_corner - 1 + 1; // -1 for bigger than first_corner; +1 to get max range
+    //     if with_space_for_corner < max {
             // println!("bottom line: SKIP custom left {}-{}: plate_id: {}, first={}, width: {}, config: {}, net_squares: {}", with_space_for_corner-1, max, plate_id, config.first_corner, config.plates[plate_id].width, config, config.net_squares);
-            max = with_space_for_corner;
-        }
+            // max = with_space_for_corner;
+        // }
     }
 
     // after adding a new square, we might get a new glass on the right
