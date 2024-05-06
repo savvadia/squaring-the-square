@@ -15,7 +15,7 @@ fn main() {
     let mut squares_placed = 0;
     // 50 reaches 152
     // 63 reaches glass size of 220. that's enough for our needs
-    let MAX_GLASS_READ_ONLY: [i32; 256] = exhaustive::solve_glasses(60); 
+    let MAX_GLASS_READ_ONLY: [i32; 256] = exhaustive::solve_glasses(50); 
     let mut max_square_for_glass: [i32; 256] =  [0; 256];
 
     for s in 1..256 {
