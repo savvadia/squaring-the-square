@@ -79,18 +79,39 @@ pub fn solve_glasses_wo_half(max_glass: usize) -> ([i32; 256]) {
 }
 fn next_plate(config: &mut Config) -> () { //find smallest delimited plate, and decompose it
     let mut l_min : Integer = config.size + Integer::from(1); //equiv to infinity
+    let mut walls_ratio : f32 = -1000.0;
     let mut p_min_i : usize = 0;
+    // let mut p_max_ratio : usize = 0;
     //find the minimum delimited plate
     //if, in the meantime, we identify that there is only three plates, we have found a square or rectangle and should return them
     for i in 1..config.num_plates()-1 {
         let plate = &config.plates[i];
         let plate_prev = &config.plates[i-1];
         let plate_next = &config.plates[i+1];
-        if plate_prev.height > plate.height && plate_next.height > plate.height && plate.width < l_min{
-            l_min = plate.width;
-            p_min_i = i;
+        if plate_prev.height > plate.height && plate_next.height > plate.height {
+            if is_unfillable_glass(config, i, plate_prev.height - plate.height, plate.width, plate_next.height - plate.height) {
+                // println!("[next_plate] GO BACK for plate_id: {}, prev: {}, w: {} can_use: {}, next:{}, config: {}", i, plate_prev.height - plate.height, plate.width, config.can_use(plate.width), plate_next.height - plate.height, config);
+                return;
+            }
+            // let depth = std::cmp::min(plate_prev.height - plate.height, plate_next.height - plate.height);
+            // let new_ratio : f32 =  ((depth - (if config.can_use(plate.width) {0} else {plate.width}) ) as f32 / plate.width as f32) as f32;
+            // if new_ratio > walls_ratio {
+            //     // println!("[next_plate] selected plate_id: {} depth: {}, width: {}, can_use: {}, ratio {} -> {}, config: {}",
+            //         // i, depth, plate.width, config.can_use(plate.width), walls_ratio, new_ratio, config);
+            //     walls_ratio = new_ratio;
+            //     p_max_ratio = i;
+            // }
+            // println!("[next_plate] selected plate_id: {} depth: {}, width: {}, can_use: {}, ratio {}, config: {}",
+            // i, depth, plate.width, config.can_use(plate.width), walls_ratio, config);
+            if plate.width < l_min {
+                l_min = plate.width;
+                p_min_i = i;
+            }
         }
     }
+    // if p_max_ratio > 0 {
+    //     p_min_i = p_max_ratio;
+    // }
     //print width and index of minimum delimited plate
     // println!("[next_plate] l_min: {}, p_min_i: {}", l_min, p_min_i);
     if l_min == config.size {
@@ -338,11 +359,11 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
         // else if plate_id==1 &&                                                  // first plate
         //      h + square == config.size &&     // touches the ceiling
         //      square < config.first_corner  {                                // smaller than the first 
-        //         // println!("bottom line: SKIP vertical top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
-        // } else if plate_id==1 &&                                                  // first plate
-        //      h + square < config.size &&       // not touching ceiling
-        //      config.size - h - square < config.first_corner { // not leaving enough space
-        //         // println!("bottom line: SKIP vertical left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
+                // println!("bottom line: SKIP vertical top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
+            // } else if plate_id==1 &&                                                  // first plate
+            //  h + square < config.size &&       // not touching ceiling
+            //  config.size - h - square < config.first_corner { // not leaving enough space
+            //     println!("bottom line: SKIP vertical left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
             } else if plate_id >= 2 && 
                 is_unfillable_glass(config, plate_id, 
                     config.plates[plate_id-2].height - lh, 
@@ -388,7 +409,12 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                 h + square - rh,
                 rw,
                 config.plates[plate_id+2].height - rh) {
-            } else {
+                // } 
+                // else if plate_id==1 &&                                                  // first plate
+                //      h + square == config.size &&     // touches the ceiling
+                //      square < config.first_corner  {                                // smaller than the first 
+                //         println!("bottom line: SKIP horizontal top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
+                    } else {
 
             config.net_squares += 1;
                 //let mut config_backup = config.clone();
@@ -475,7 +501,12 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
 
             } else  if h == 0  && plate_id == last_plate_id && w - s <= config.first_corner {
                 // the ritghr bottom corner should be bigger than the first corner
-            } else {
+            } 
+            else if plate_id==1 &&                                                  // first plate
+                 h + s == config.size &&     // touches the ceiling
+                 s < config.first_corner  {                                // smaller than the first 
+                    // println!("bottom line: SKIP custom top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, s, config, config.net_squares);
+        } else {
 
             // if we are trying to put the square in the bottom right corner, it must be greater than the first corner
             // if h == 0  &&  // bottom line
