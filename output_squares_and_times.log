@@ -1,0 +1,883 @@
+==>    Time for glasses of size 1: 0 ms -> max glass 1
+==>    Time for glasses of size 2: 0 ms -> max glass 2
+==>    Time for glasses of size 3: 0 ms -> max glass 4
+==>    Time for glasses of size 4: 0 ms -> max glass 5
+==>    Time for glasses of size 5: 0 ms -> max glass 7
+==>    Time for glasses of size 6: 0 ms -> max glass 8
+==>    Time for glasses of size 7: 0 ms -> max glass 12
+==>    Time for glasses of size 8: 0 ms -> max glass 12
+==>    Time for glasses of size 9: 0 ms -> max glass 16
+==>    Time for glasses of size 10: 0 ms -> max glass 15
+==>    Time for glasses of size 11: 0 ms -> max glass 20
+==>    Time for glasses of size 12: 0 ms -> max glass 24
+==>    Time for glasses of size 13: 0 ms -> max glass 26
+==>    Time for glasses of size 14: 0 ms -> max glass 25
+==>    Time for glasses of size 15: 0 ms -> max glass 30
+==>    Time for glasses of size 16: 0 ms -> max glass 29
+==>    Time for glasses of size 17: 0 ms -> max glass 35
+==>    Time for glasses of size 18: 0 ms -> max glass 33
+==>    Time for glasses of size 19: 0 ms -> max glass 40
+==>    Time for glasses of size 20: 0 ms -> max glass 40
+==>    Time for glasses of size 21: 1 ms -> max glass 47
+==>    Time for glasses of size 22: 1 ms -> max glass 46
+==>    Time for glasses of size 23: 2 ms -> max glass 61
+==>    Time for glasses of size 24: 2 ms -> max glass 51
+==>    Time for glasses of size 25: 3 ms -> max glass 73
+==>    Time for glasses of size 26: 3 ms -> max glass 56
+==>    Time for glasses of size 27: 2 ms -> max glass 63
+==>    Time for glasses of size 28: 3 ms -> max glass 63
+==>    Time for glasses of size 29: 4 ms -> max glass 71
+==>    Time for glasses of size 30: 5 ms -> max glass 71
+==>    Time for glasses of size 31: 7 ms -> max glass 83
+==>    Time for glasses of size 32: 9 ms -> max glass 83
+==>    Time for glasses of size 33: 13 ms -> max glass 90
+==>    Time for glasses of size 34: 14 ms -> max glass 83
+==>    Time for glasses of size 35: 18 ms -> max glass 96
+==>    Time for glasses of size 36: 22 ms -> max glass 95
+==>    Time for glasses of size 37: 31 ms -> max glass 108
+==>    Time for glasses of size 38: 33 ms -> max glass 99
+==>    Time for glasses of size 39: 49 ms -> max glass 108
+==>    Time for glasses of size 40: 55 ms -> max glass 113
+==>    Time for glasses of size 41: 74 ms -> max glass 127
+==>    Time for glasses of size 42: 81 ms -> max glass 105
+==>    Time for glasses of size 43: 116 ms -> max glass 146
+==>    Time for glasses of size 44: 139 ms -> max glass 146
+==>    Time for glasses of size 45: 176 ms -> max glass 131
+==>    Time for glasses of size 46: 199 ms -> max glass 150
+==>    Time for glasses of size 47: 301 ms -> max glass 150
+==>    Time for glasses of size 48: 332 ms -> max glass 161
+==>    Time for glasses of size 49: 402 ms -> max glass 144
+max_square_for_glass square: 2 max_square_for_glass: 1
+max_square_for_glass square: 3 max_square_for_glass: 1
+max_square_for_glass square: 4 max_square_for_glass: 2
+max_square_for_glass square: 5 max_square_for_glass: 2
+max_square_for_glass square: 6 max_square_for_glass: 3
+max_square_for_glass square: 7 max_square_for_glass: 4
+max_square_for_glass square: 8 max_square_for_glass: 4
+max_square_for_glass square: 9 max_square_for_glass: 5
+max_square_for_glass square: 10 max_square_for_glass: 5
+max_square_for_glass square: 11 max_square_for_glass: 6
+max_square_for_glass square: 12 max_square_for_glass: 7
+max_square_for_glass square: 13 max_square_for_glass: 7
+max_square_for_glass square: 14 max_square_for_glass: 8
+max_square_for_glass square: 15 max_square_for_glass: 8
+max_square_for_glass square: 16 max_square_for_glass: 9
+max_square_for_glass square: 17 max_square_for_glass: 10
+max_square_for_glass square: 18 max_square_for_glass: 11
+max_square_for_glass square: 19 max_square_for_glass: 12
+max_square_for_glass square: 20 max_square_for_glass: 12
+max_square_for_glass square: 21 max_square_for_glass: 12
+max_square_for_glass square: 22 max_square_for_glass: 13
+max_square_for_glass square: 23 max_square_for_glass: 14
+max_square_for_glass square: 24 max_square_for_glass: 15
+max_square_for_glass square: 25 max_square_for_glass: 16
+max_square_for_glass square: 26 max_square_for_glass: 15
+max_square_for_glass square: 27 max_square_for_glass: 16
+max_square_for_glass square: 28 max_square_for_glass: 17
+max_square_for_glass square: 29 max_square_for_glass: 18
+max_square_for_glass square: 30 max_square_for_glass: 19
+max_square_for_glass square: 31 max_square_for_glass: 20
+max_square_for_glass square: 32 max_square_for_glass: 20
+max_square_for_glass square: 33 max_square_for_glass: 21
+max_square_for_glass square: 34 max_square_for_glass: 22
+max_square_for_glass square: 35 max_square_for_glass: 23
+max_square_for_glass square: 36 max_square_for_glass: 24
+max_square_for_glass square: 37 max_square_for_glass: 24
+max_square_for_glass square: 38 max_square_for_glass: 25
+max_square_for_glass square: 39 max_square_for_glass: 26
+max_square_for_glass square: 40 max_square_for_glass: 25
+max_square_for_glass square: 41 max_square_for_glass: 26
+max_square_for_glass square: 42 max_square_for_glass: 27
+max_square_for_glass square: 43 max_square_for_glass: 28
+max_square_for_glass square: 44 max_square_for_glass: 29
+max_square_for_glass square: 45 max_square_for_glass: 30
+max_square_for_glass square: 46 max_square_for_glass: 29
+max_square_for_glass square: 47 max_square_for_glass: 30
+max_square_for_glass square: 48 max_square_for_glass: 31
+max_square_for_glass square: 49 max_square_for_glass: 32
+max_square_for_glass square: 50 max_square_for_glass: 33
+max_square_for_glass square: 51 max_square_for_glass: 34
+max_square_for_glass square: 52 max_square_for_glass: 35
+max_square_for_glass square: 53 max_square_for_glass: 34
+max_square_for_glass square: 54 max_square_for_glass: 35
+max_square_for_glass square: 55 max_square_for_glass: 36
+max_square_for_glass square: 56 max_square_for_glass: 37
+max_square_for_glass square: 57 max_square_for_glass: 38
+max_square_for_glass square: 58 max_square_for_glass: 39
+max_square_for_glass square: 59 max_square_for_glass: 40
+max_square_for_glass square: 60 max_square_for_glass: 40
+max_square_for_glass square: 61 max_square_for_glass: 40
+max_square_for_glass square: 62 max_square_for_glass: 41
+max_square_for_glass square: 63 max_square_for_glass: 42
+max_square_for_glass square: 64 max_square_for_glass: 43
+max_square_for_glass square: 65 max_square_for_glass: 44
+max_square_for_glass square: 66 max_square_for_glass: 45
+max_square_for_glass square: 67 max_square_for_glass: 46
+max_square_for_glass square: 68 max_square_for_glass: 47
+max_square_for_glass square: 69 max_square_for_glass: 46
+max_square_for_glass square: 70 max_square_for_glass: 47
+max_square_for_glass square: 71 max_square_for_glass: 48
+max_square_for_glass square: 72 max_square_for_glass: 49
+max_square_for_glass square: 73 max_square_for_glass: 50
+max_square_for_glass square: 74 max_square_for_glass: 51
+max_square_for_glass square: 75 max_square_for_glass: 52
+max_square_for_glass square: 76 max_square_for_glass: 53
+max_square_for_glass square: 77 max_square_for_glass: 54
+max_square_for_glass square: 78 max_square_for_glass: 55
+max_square_for_glass square: 79 max_square_for_glass: 56
+max_square_for_glass square: 80 max_square_for_glass: 57
+max_square_for_glass square: 81 max_square_for_glass: 58
+max_square_for_glass square: 82 max_square_for_glass: 59
+max_square_for_glass square: 83 max_square_for_glass: 60
+max_square_for_glass square: 84 max_square_for_glass: 61
+max_square_for_glass square: 85 max_square_for_glass: 60
+max_square_for_glass square: 86 max_square_for_glass: 61
+max_square_for_glass square: 87 max_square_for_glass: 62
+max_square_for_glass square: 88 max_square_for_glass: 63
+max_square_for_glass square: 89 max_square_for_glass: 64
+max_square_for_glass square: 90 max_square_for_glass: 65
+max_square_for_glass square: 91 max_square_for_glass: 66
+max_square_for_glass square: 92 max_square_for_glass: 67
+max_square_for_glass square: 93 max_square_for_glass: 68
+max_square_for_glass square: 94 max_square_for_glass: 69
+max_square_for_glass square: 95 max_square_for_glass: 70
+max_square_for_glass square: 96 max_square_for_glass: 71
+max_square_for_glass square: 97 max_square_for_glass: 72
+max_square_for_glass square: 98 max_square_for_glass: 73
+max_square_for_glass square: 99 max_square_for_glass: 70
+max_square_for_glass square: 100 max_square_for_glass: 71
+max_square_for_glass square: 101 max_square_for_glass: 71
+max_square_for_glass square: 102 max_square_for_glass: 71
+max_square_for_glass square: 103 max_square_for_glass: 72
+max_square_for_glass square: 104 max_square_for_glass: 73
+max_square_for_glass square: 105 max_square_for_glass: 74
+max_square_for_glass square: 106 max_square_for_glass: 75
+max_square_for_glass square: 107 max_square_for_glass: 76
+max_square_for_glass square: 108 max_square_for_glass: 77
+max_square_for_glass square: 109 max_square_for_glass: 78
+max_square_for_glass square: 110 max_square_for_glass: 79
+max_square_for_glass square: 111 max_square_for_glass: 80
+max_square_for_glass square: 112 max_square_for_glass: 81
+max_square_for_glass square: 113 max_square_for_glass: 82
+max_square_for_glass square: 114 max_square_for_glass: 83
+max_square_for_glass square: 115 max_square_for_glass: 83
+max_square_for_glass square: 116 max_square_for_glass: 83
+max_square_for_glass square: 117 max_square_for_glass: 84
+max_square_for_glass square: 118 max_square_for_glass: 85
+max_square_for_glass square: 119 max_square_for_glass: 86
+max_square_for_glass square: 120 max_square_for_glass: 87
+max_square_for_glass square: 121 max_square_for_glass: 88
+max_square_for_glass square: 122 max_square_for_glass: 89
+max_square_for_glass square: 123 max_square_for_glass: 90
+max_square_for_glass square: 124 max_square_for_glass: 89
+max_square_for_glass square: 125 max_square_for_glass: 90
+max_square_for_glass square: 126 max_square_for_glass: 91
+max_square_for_glass square: 127 max_square_for_glass: 92
+max_square_for_glass square: 128 max_square_for_glass: 93
+max_square_for_glass square: 129 max_square_for_glass: 94
+max_square_for_glass square: 130 max_square_for_glass: 95
+max_square_for_glass square: 131 max_square_for_glass: 96
+max_square_for_glass square: 132 max_square_for_glass: 95
+max_square_for_glass square: 133 max_square_for_glass: 96
+max_square_for_glass square: 134 max_square_for_glass: 97
+max_square_for_glass square: 135 max_square_for_glass: 98
+max_square_for_glass square: 136 max_square_for_glass: 99
+max_square_for_glass square: 137 max_square_for_glass: 100
+max_square_for_glass square: 138 max_square_for_glass: 101
+max_square_for_glass square: 139 max_square_for_glass: 102
+max_square_for_glass square: 140 max_square_for_glass: 103
+max_square_for_glass square: 141 max_square_for_glass: 104
+max_square_for_glass square: 142 max_square_for_glass: 105
+max_square_for_glass square: 143 max_square_for_glass: 106
+max_square_for_glass square: 144 max_square_for_glass: 107
+max_square_for_glass square: 145 max_square_for_glass: 108
+max_square_for_glass square: 146 max_square_for_glass: 107
+max_square_for_glass square: 147 max_square_for_glass: 108
+max_square_for_glass square: 148 max_square_for_glass: 108
+max_square_for_glass square: 149 max_square_for_glass: 109
+max_square_for_glass square: 150 max_square_for_glass: 110
+max_square_for_glass square: 151 max_square_for_glass: 111
+max_square_for_glass square: 152 max_square_for_glass: 112
+max_square_for_glass square: 153 max_square_for_glass: 113
+max_square_for_glass square: 154 max_square_for_glass: 113
+max_square_for_glass square: 155 max_square_for_glass: 114
+max_square_for_glass square: 156 max_square_for_glass: 115
+max_square_for_glass square: 157 max_square_for_glass: 116
+max_square_for_glass square: 158 max_square_for_glass: 117
+max_square_for_glass square: 159 max_square_for_glass: 118
+max_square_for_glass square: 160 max_square_for_glass: 119
+max_square_for_glass square: 161 max_square_for_glass: 120
+max_square_for_glass square: 162 max_square_for_glass: 121
+max_square_for_glass square: 163 max_square_for_glass: 122
+max_square_for_glass square: 164 max_square_for_glass: 123
+max_square_for_glass square: 165 max_square_for_glass: 124
+max_square_for_glass square: 166 max_square_for_glass: 125
+max_square_for_glass square: 167 max_square_for_glass: 126
+max_square_for_glass square: 168 max_square_for_glass: 127
+max_square_for_glass square: 169 max_square_for_glass: 126
+max_square_for_glass square: 170 max_square_for_glass: 127
+max_square_for_glass square: 171 max_square_for_glass: 128
+max_square_for_glass square: 172 max_square_for_glass: 129
+max_square_for_glass square: 173 max_square_for_glass: 130
+max_square_for_glass square: 174 max_square_for_glass: 131
+max_square_for_glass square: 175 max_square_for_glass: 132
+max_square_for_glass square: 176 max_square_for_glass: 133
+max_square_for_glass square: 177 max_square_for_glass: 134
+max_square_for_glass square: 178 max_square_for_glass: 135
+max_square_for_glass square: 179 max_square_for_glass: 136
+max_square_for_glass square: 180 max_square_for_glass: 137
+max_square_for_glass square: 181 max_square_for_glass: 138
+max_square_for_glass square: 182 max_square_for_glass: 139
+max_square_for_glass square: 183 max_square_for_glass: 140
+max_square_for_glass square: 184 max_square_for_glass: 141
+max_square_for_glass square: 185 max_square_for_glass: 142
+max_square_for_glass square: 186 max_square_for_glass: 143
+max_square_for_glass square: 187 max_square_for_glass: 144
+max_square_for_glass square: 188 max_square_for_glass: 145
+max_square_for_glass square: 189 max_square_for_glass: 146
+max_square_for_glass square: 190 max_square_for_glass: 146
+max_square_for_glass square: 191 max_square_for_glass: 145
+max_square_for_glass square: 192 max_square_for_glass: 146
+max_square_for_glass square: 193 max_square_for_glass: 147
+max_square_for_glass square: 194 max_square_for_glass: 148
+max_square_for_glass square: 195 max_square_for_glass: 149
+max_square_for_glass square: 196 max_square_for_glass: 150
+max_square_for_glass square: 197 max_square_for_glass: 150
+max_square_for_glass square: 198 max_square_for_glass: 150
+max_square_for_glass square: 199 max_square_for_glass: 151
+max_square_for_glass square: 200 max_square_for_glass: 152
+max_square_for_glass square: 201 max_square_for_glass: 153
+max_square_for_glass square: 202 max_square_for_glass: 154
+max_square_for_glass square: 203 max_square_for_glass: 155
+max_square_for_glass square: 204 max_square_for_glass: 156
+max_square_for_glass square: 205 max_square_for_glass: 157
+max_square_for_glass square: 206 max_square_for_glass: 158
+max_square_for_glass square: 207 max_square_for_glass: 159
+max_square_for_glass square: 208 max_square_for_glass: 160
+max_square_for_glass square: 209 max_square_for_glass: 161
+max_square_for_glass square: 210 max_square_for_glass: 160
+max_square_for_glass square: 211 max_square_for_glass: 161
+max_square_for_glass square: 212 max_square_for_glass: 162
+max_square_for_glass square: 213 max_square_for_glass: 163
+max_square_for_glass square: 214 max_square_for_glass: 164
+max_square_for_glass square: 215 max_square_for_glass: 165
+max_square_for_glass square: 216 max_square_for_glass: 166
+max_square_for_glass square: 217 max_square_for_glass: 167
+max_square_for_glass square: 218 max_square_for_glass: 168
+max_square_for_glass square: 219 max_square_for_glass: 169
+max_square_for_glass square: 220 max_square_for_glass: 170
+max_square_for_glass square: 221 max_square_for_glass: 171
+max_square_for_glass square: 222 max_square_for_glass: 172
+max_square_for_glass square: 223 max_square_for_glass: 173
+max_square_for_glass square: 224 max_square_for_glass: 174
+max_square_for_glass square: 225 max_square_for_glass: 175
+max_square_for_glass square: 226 max_square_for_glass: 176
+max_square_for_glass square: 227 max_square_for_glass: 177
+max_square_for_glass square: 228 max_square_for_glass: 178
+max_square_for_glass square: 229 max_square_for_glass: 179
+max_square_for_glass square: 230 max_square_for_glass: 180
+max_square_for_glass square: 231 max_square_for_glass: 181
+max_square_for_glass square: 232 max_square_for_glass: 182
+max_square_for_glass square: 233 max_square_for_glass: 183
+max_square_for_glass square: 234 max_square_for_glass: 184
+max_square_for_glass square: 235 max_square_for_glass: 185
+max_square_for_glass square: 236 max_square_for_glass: 186
+max_square_for_glass square: 237 max_square_for_glass: 187
+max_square_for_glass square: 238 max_square_for_glass: 188
+max_square_for_glass square: 239 max_square_for_glass: 189
+max_square_for_glass square: 240 max_square_for_glass: 190
+max_square_for_glass square: 241 max_square_for_glass: 191
+max_square_for_glass square: 242 max_square_for_glass: 192
+max_square_for_glass square: 243 max_square_for_glass: 193
+max_square_for_glass square: 244 max_square_for_glass: 194
+max_square_for_glass square: 245 max_square_for_glass: 195
+max_square_for_glass square: 246 max_square_for_glass: 196
+max_square_for_glass square: 247 max_square_for_glass: 197
+max_square_for_glass square: 248 max_square_for_glass: 198
+max_square_for_glass square: 249 max_square_for_glass: 199
+max_square_for_glass square: 250 max_square_for_glass: 200
+max_square_for_glass square: 251 max_square_for_glass: 201
+max_square_for_glass square: 252 max_square_for_glass: 202
+max_square_for_glass square: 253 max_square_for_glass: 203
+max_square_for_glass square: 254 max_square_for_glass: 204
+max_square_for_glass square: 255 max_square_for_glass: 205
+1 start 0
+Work units: 0
+1 queueempty 12
+2 start 13
+Work units: 0
+2 queueempty 25
+3 start 25
+Work units: 0
+3 queueempty 38
+4 start 38
+Work units: 0
+4 queueempty 50
+5 start 50
+Work units: 0
+5 queueempty 63
+6 start 63
+Work units: 0
+6 queueempty 75
+7 start 75
+Work units: 0
+7 queueempty 86
+8 start 86
+Work units: 0
+8 queueempty 98
+9 start 98
+Work units: 0
+9 queueempty 111
+10 start 111
+Work units: 0
+10 queueempty 121
+11 start 121
+Work units: 0
+11 queueempty 134
+12 start 134
+Work units: 0
+12 queueempty 147
+13 start 147
+Work units: 0
+13 queueempty 159
+14 start 159
+Work units: 0
+14 queueempty 172
+15 start 172
+Work units: 0
+15 queueempty 182
+16 start 182
+Work units: 0
+16 queueempty 194
+17 start 194
+Work units: 0
+17 queueempty 207
+18 start 207
+Work units: 0
+18 queueempty 220
+19 start 220
+Work units: 0
+19 queueempty 232
+20 start 232
+Work units: 0
+20 queueempty 242
+21 start 242
+Work units: 0
+21 queueempty 255
+22 start 255
+Work units: 0
+22 queueempty 268
+23 start 268
+Work units: 1
+23 queueempty 280
+24 start 280
+23 end 292 -> 24
+Work units: 3
+24 queueempty 292
+25 start 292
+24 end 305 -> 25
+Work units: 6
+25 queueempty 305
+26 start 305
+25 end 316 -> 23
+Work units: 8
+26 queueempty 316
+27 start 316
+26 end 328 -> 23
+Work units: 13
+27 queueempty 329
+28 start 329
+27 end 341 -> 25
+Work units: 17
+28 queueempty 342
+29 start 342
+28 end 354 -> 24
+Work units: 22
+29 queueempty 354
+30 start 354
+29 end 367 -> 24
+Work units: 31
+30 queueempty 367
+31 start 367
+30 end 380 -> 25
+Work units: 35
+31 queueempty 381
+32 start 381
+31 end 393 -> 26
+Work units: 44
+32 queueempty 394
+33 start 394
+32 end 407 -> 25
+Work units: 52
+33 queueempty 408
+34 start 408
+33 end 420 -> 25
+Work units: 62
+34 queueempty 421
+35 start 421
+34 end 434 -> 26
+Work units: 70
+35 queueempty 435
+36 start 435
+35 end 446 -> 24
+Work units: 82
+36 queueempty 448
+37 start 448
+36 end 460 -> 24
+Work units: 87
+37 queueempty 461
+38 start 461
+37 end 474 -> 26
+Work units: 99
+38 queueempty 476
+39 start 476
+38 end 487 -> 26
+Work units: 105
+39 queueempty 490
+40 start 490
+39 end 501 -> 25
+Work units: 117
+40 queueempty 503
+41 start 503
+40 end 516 -> 26
+Work units: 125
+41 queueempty 518
+42 start 518
+41 end 530 -> 27
+Work units: 143
+42 queueempty 533
+43 start 533
+42 end 546 -> 27
+Work units: 149
+43 queueempty 549
+44 start 549
+43 end 561 -> 28
+Work units: 165
+44 queueempty 564
+45 start 564
+44 end 576 -> 27
+Work units: 173
+45 queueempty 579
+46 start 579
+45 end 590 -> 25
+Work units: 189
+46 queueempty 593
+47 start 593
+46 end 604 -> 24
+Work units: 197
+47 queueempty 608
+48 start 608
+47 end 620 -> 27
+Work units: 218
+48 queueempty 625
+49 start 625
+48 end 635 -> 27
+Work units: 225
+49 queueempty 641
+50 start 641
+49 end 653 -> 28
+Work units: 245
+50 queueempty 658
+51 start 658
+50 end 671 -> 30
+Work units: 253
+51 queueempty 676
+52 start 676
+51 end 687 -> 28
+Work units: 274
+52 queueempty 692
+53 start 692
+52 end 705 -> 29
+Work units: 285
+53 queueempty 712
+54 start 712
+53 end 725 -> 32
+Work units: 307
+54 queueempty 733
+55 start 733
+54 end 744 -> 31
+Work units: 314
+55 queueempty 753
+56 start 753
+55 end 766 -> 33
+Work units: 335
+56 queueempty 776
+57 start 776
+56 end 787 -> 34
+Work units: 346
+57 queueempty 798
+58 start 798
+57 end 811 -> 35
+Work units: 369
+58 queueempty 822
+59 start 822
+58 end 839 -> 40
+Work units: 380
+59 queueempty 847
+60 start 847
+59 end 860 -> 37
+Work units: 404
+60 queueempty 871
+61 start 871
+60 end 883 -> 36
+Work units: 415
+61 queueempty 891
+62 start 891
+61 end 904 -> 33
+Work units: 441
+62 queueempty 913
+63 start 913
+62 end 925 -> 34
+Work units: 449
+63 queueempty 940
+64 start 940
+63 end 953 -> 40
+Work units: 475
+64 queueempty 969
+65 start 969
+64 end 982 -> 42
+Work units: 486
+65 queueempty 998
+66 start 998
+65 end 1009 -> 39
+Work units: 515
+66 queueempty 1027
+67 start 1027
+66 end 1040 -> 41
+Work units: 526
+67 queueempty 1059
+68 start 1059
+67 end 1071 -> 44
+Work units: 556
+68 queueempty 1094
+69 start 1094
+68 end 1105 -> 45
+Work units: 566
+69 queueempty 1129
+70 start 1129
+69 end 1141 -> 47
+Work units: 598
+70 queueempty 1168
+71 start 1168
+70 end 1181 -> 52
+Work units: 607
+71 queueempty 1235
+72 start 1235
+71 end 1248 -> 79
+Work units: 637
+72 queueempty 1296
+73 start 1296
+72 end 1308 -> 73
+Work units: 648
+73 queueempty 1350
+74 start 1350
+73 end 1363 -> 67
+Work units: 680
+74 queueempty 1410
+75 start 1410
+74 end 1423 -> 72
+Work units: 692
+75 queueempty 1478
+76 start 1478
+75 end 1491 -> 80
+Work units: 726
+76 queueempty 1558
+77 start 1558
+76 end 1571 -> 92
+Work units: 739
+77 queueempty 1643
+78 start 1643
+77 end 1656 -> 97
+Work units: 775
+78 queueempty 1753
+79 start 1753
+78 end 1766 -> 123
+Work units: 789
+79 queueempty 1874
+80 start 1874
+79 end 1885 -> 131
+Work units: 825
+80 queueempty 2014
+81 start 2014
+80 end 2027 -> 152
+Work units: 840
+81 queueempty 2175
+82 start 2175
+Work units: 876
+81 end 2190 -> 175
+82 queueempty 2359
+83 start 2359
+82 end 2371 -> 196
+Work units: 889
+83 queueempty 2617
+84 start 2617
+Work units: 927
+83 end 2635 -> 276
+84 queueempty 2890
+85 start 2892
+84 end 2905 -> 287
+Work units: 941
+85 queueempty 3186
+86 start 3186
+Work units: 982
+85 end 3341 -> 449
+86 queueempty 3533
+87 start 3533
+Work units: 997
+87 queueempty 3944
+88 start 3944
+86 end 3959 -> 772
+Work units: 1040
+88 queueempty 4461
+89 start 4461
+87 end 4473 -> 939
+Work units: 1057
+89 queueempty 5005
+90 start 5005
+Work units: 1101
+88 end 5467 -> 1523
+90 queueempty 5670
+91 start 5677
+Work units: 1116
+89 end 6252 -> 1790
+91 queueempty 6542
+92 start 6542
+Work units: 1157
+90 end 7438 -> 2433
+92 queueempty 7476
+93 start 7476
+Work units: 1174
+91 end 7758 -> 2080
+93 queueempty 8518
+94 start 8518
+Work units: 1218
+92 end 9303 -> 2761
+94 queueempty 9810
+95 start 9810
+Work units: 1236
+93 end 10486 -> 3009
+95 queueempty 11307
+96 start 11307
+Work units: 1282
+94 end 11641 -> 3122
+95 end 13023 -> 3213
+96 queueempty 13112
+97 start 13112
+Work units: 1301
+97 queueempty 15174
+98 start 15174
+Work units: 1349
+96 end 16024 -> 4716
+97 end 17006 -> 3894
+98 queueempty 17640
+99 start 17640
+Work units: 1368
+99 queueempty 20834
+100 start 20834
+Work units: 1418
+98 end 21073 -> 5899
+99 end 23825 -> 6185
+100 queueempty 24264
+101 start 24264
+Work units: 1437
+100 end 26927 -> 6093
+101 queueempty 28030
+102 start 28030
+Work units: 1486
+101 end 30959 -> 6695
+102 queueempty 32569
+103 start 32569
+Work units: 1506
+102 end 36788 -> 8757
+103 queueempty 37971
+104 start 37971
+Work units: 1558
+103 end 40383 -> 7813
+104 queueempty 44439
+105 start 44439
+Work units: 1580
+104 end 48748 -> 10776
+105 queueempty 51799
+106 start 51799
+Work units: 1634
+105 end 55608 -> 11169
+106 queueempty 60470
+107 start 60470
+Work units: 1658
+106 end 64692 -> 12892
+107 queueempty 70822
+108 start 70822
+Work units: 1714
+107 end 74924 -> 14454
+108 queueempty 82779
+109 start 82779
+Work units: 1737
+108 end 89155 -> 18332
+109 queueempty 96683
+110 start 96683
+Work units: 1791
+109 end 99652 -> 16873
+110 queueempty 112739
+111 start 112739
+Work units: 1813
+110 end 119276 -> 22593
+111 queueempty 132314
+112 start 132314
+Work units: 1869
+111 end 137786 -> 25047
+112 queueempty 156874
+113 start 156874
+Work units: 1892
+112 end 161959 -> 29645
+113 queueempty 181913
+114 start 181913
+Work units: 1950
+113 end 187754 -> 30879
+114 queueempty 210822
+115 start 210822
+Work units: 1973
+114 end 219991 -> 38077
+115 queueempty 245626
+116 start 245626
+Work units: 2033
+115 end 251440 -> 40618
+116 queueempty 285631
+117 start 285631
+Work units: 2058
+116 end 294257 -> 48630
+117 queueempty 331395
+118 start 331395
+Work units: 2119
+117 end 337150 -> 51518
+118 queueempty 383677
+119 start 383677
+Work units: 2143
+118 end 396618 -> 65223
+119 queueempty 445992
+120 start 445992
+Work units: 2205
+119 end 453235 -> 69557
+120 queueempty 521577
+121 start 521577
+Work units: 2229
+120 end 534809 -> 88817
+121 queueempty 603367
+122 start 603367
+Work units: 2291
+121 end 612382 -> 90804
+122 queueempty 699199
+123 start 699199
+Work units: 2317
+122 end 715894 -> 112527
+123 queueempty 813467
+124 start 813467
+Work units: 2380
+123 end 826141 -> 126941
+124 queueempty 943877
+125 start 943877
+Work units: 2405
+124 end 958310 -> 144843
+125 queueempty 1093492
+126 start 1093492
+Work units: 2469
+125 end 1121267 -> 177389
+126 queueempty 1267257
+127 start 1267257
+Work units: 2495
+126 end 1286989 -> 193496
+127 queueempty 1471301
+128 start 1471301
+Work units: 2562
+127 end 1493930 -> 226672
+128 queueempty 1710180
+129 start 1710180
+Work units: 2588
+128 end 1731555 -> 260253
+129 queueempty 1981403
+130 start 1981403
+Work units: 2657
+129 end 2015146 -> 304966
+130 queueempty 2300428
+131 start 2300428
+Work units: 2682
+130 end 2436760 -> 455357
+131 queueempty 2666849
+132 start 2666849
+Work units: 2749
+131 end 2692659 -> 392231
+132 queueempty 3096152
+133 start 3096152
+Work units: 2773
+132 end 3128767 -> 461917
+133 queueempty 3569253
+134 start 3569253
+Work units: 2842
+133 end 3599626 -> 503474
+134 queueempty 4124567
+135 start 4124567
+Work units: 2867
+134 end 4172105 -> 602852
+135 queueempty 4798431
+136 start 4798431
+Work units: 2938
+135 end 4881973 -> 757406
+136 queueempty 5556532
+137 start 5556532
+Work units: 2964
+136 end 5604003 -> 805571
+137 queueempty 6402326
+138 start 6402326
+Work units: 3036
+137 end 6451528 -> 894995
+138 queueempty 7403431
+139 start 7403431
+Work units: 3065
+138 end 7478958 -> 1076631
+139 queueempty 8555145
+140 start 8555145
+Work units: 3141
+139 end 8611975 -> 1208544
+140 queueempty 9925849
+141 start 9925849
+Work units: 3170
+140 end 10158146 -> 1603001
+141 queueempty 11450277
+142 start 11450277
+Work units: 3248
+141 end 11527301 -> 1601451
+142 queueempty 13189769
+143 start 13189769
+Work units: 3278
+142 end 13293957 -> 1843680
+143 queueempty 15250739
+144 start 15250739
+Work units: 3358
+143 end 15367916 -> 2178147
+144 queueempty 17660951
+145 start 17660951
+Work units: 3389
+144 end 17775558 -> 2524818
+145 queueempty 20335126
+146 start 20335126
+Work units: 3470
+145 end 20820502 -> 3159550
+146 queueempty 23421472
+147 start 23421472
+Work units: 3501
+146 end 23548194 -> 3213068
+147 queueempty 27032342
+148 start 27032342
+Work units: 3580
+147 end 27220836 -> 3799364
+148 queueempty 31163632
+149 start 31163632
+Work units: 3610
+148 end 31307402 -> 4275060
+149 queueempty 35792785
+150 start 35792785
+Work units: 3691
+149 end 35959809 -> 4796176
+150 queueempty 41317067
+150 end 41435394 -> 5642608
+41437512
+Squares (total): 6401725691598

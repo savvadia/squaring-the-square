@@ -503,10 +503,10 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                 // the ritghr bottom corner should be bigger than the first corner
             } 
             else if plate_id==1 &&                                                  // first plate
-                 h + s == config.size &&     // touches the ceiling
+                 h + s >= config.size - config.first_corner &&     // top square
                  s < config.first_corner  {                                // smaller than the first 
                     // println!("bottom line: SKIP custom top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, s, config, config.net_squares);
-        } else {
+            } else {
 
             // if we are trying to put the square in the bottom right corner, it must be greater than the first corner
             // if h == 0  &&  // bottom line
