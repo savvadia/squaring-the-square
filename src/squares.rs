@@ -19,7 +19,7 @@ pub struct Config {
 impl Config{
     pub fn new(size: Integer, max_glass: [i32; 256], max_square_for_glass: [i32; 256]) -> Self {
         let mut s = [false; 256];
-        let mut p = Vec::new();
+        let mut p = Vec::with_capacity(30);
         //First plate: height size + 1, width 1
         p.push(Plate{height: size + 1, width: 1});
         //Second plate: height 0, width size
