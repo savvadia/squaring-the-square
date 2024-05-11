@@ -77,9 +77,27 @@ pub fn solve_glasses_wo_half(max_glass: usize) -> ([i32; 256]) {
 
     return max_square_for_glass;
 }
+
+fn next_plane_id (config: &mut Config) -> usize { 
+    let mut l_min : Integer = config.size + Integer::from(1); //equiv to infinity
+    let mut p_min_i : usize = 0;
+    //if, in the meantime, we identify that there is only three plates, we have found a square or rectangle and should return them
+    for i in 1..config.num_plates()-1 {
+        let plate = &config.plates[i];
+        let plate_prev = &config.plates[i-1];
+        let plate_next = &config.plates[i+1];
+        if plate_prev.height > plate.height && plate_next.height > plate.height {
+            if plate.width < l_min {
+                l_min = plate.width;
+                p_min_i = i;
+            }
+        }
+    }
+    return p_min_i;
+}
 fn next_plate(config: &mut Config) -> () { //find smallest delimited plate, and decompose it
     let mut l_min : Integer = config.size + Integer::from(1); //equiv to infinity
-    let mut walls_ratio : f32 = -1000.0;
+    // let mut walls_ratio : f32 = -1000.0;
     let mut p_min_i : usize = 0;
     // let mut p_max_ratio : usize = 0;
     //find the minimum delimited plate
@@ -524,7 +542,28 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                     config.net_squares += 1;
                     config.add_square_quick(s, plate_id);
                     //println!("{:?}", config);
-                    next_plate(&mut config);
+                    let next_plate_to_go = next_plane_id(config);
+                    if plate_id > 1 && s > lh-h && lw < w - s && config.plates[plate_id - 2].height > lh {
+                        // if next_plate_to_go != plate_id - 1  && config.plates[next_plate_to_go].width != config.plates[plate_id - 1].width{
+                        //     println!("NEXT PLATE left - {}/w{}, expected l: {}/w{}, plate_id: {}/w{}/h{}, config: {}", 
+                        //     next_plate_to_go, config.plates[next_plate_to_go].width, 
+                        //             plate_id-1, lw, plate_id, w, h,config);
+                        // }
+                        decompose(config, plate_id - 1);
+                        // next_plate(&mut config);
+                    } else {
+                        // if next_plate_to_go != plate_id + 1 && config.plates[next_plate_to_go].width != config.plates[plate_id + 1].width{
+                        //     println!("NEXT PLATE right - {}/w{}, expected l: {}/w{}, plate_id: {}/w{}, config: {}", 
+                        //             next_plate_to_go, config.plates[next_plate_to_go].width, 
+                        //             plate_id+1, w-s, plate_id, w, config);
+                        //     next_plate(&mut config);
+                        // } else {
+                            // next_plate(&mut config);
+                            decompose(config, plate_id + 1); 
+                        // }
+                    }
+
+                    // next_plate(&mut config);
                     config.remove_square(plate_id);
                     //println!("{} checked", s);
             // }
