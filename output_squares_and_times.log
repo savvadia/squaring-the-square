@@ -23,30 +23,30 @@
 ==>    Time for glasses of size 23: 2 ms -> max glass 61
 ==>    Time for glasses of size 24: 2 ms -> max glass 51
 ==>    Time for glasses of size 25: 3 ms -> max glass 73
-==>    Time for glasses of size 26: 4 ms -> max glass 56
-==>    Time for glasses of size 27: 6 ms -> max glass 63
-==>    Time for glasses of size 28: 6 ms -> max glass 63
+==>    Time for glasses of size 26: 3 ms -> max glass 56
+==>    Time for glasses of size 27: 5 ms -> max glass 63
+==>    Time for glasses of size 28: 5 ms -> max glass 63
 ==>    Time for glasses of size 29: 7 ms -> max glass 71
 ==>    Time for glasses of size 30: 7 ms -> max glass 71
 ==>    Time for glasses of size 31: 10 ms -> max glass 83
 ==>    Time for glasses of size 32: 11 ms -> max glass 83
-==>    Time for glasses of size 33: 13 ms -> max glass 90
-==>    Time for glasses of size 34: 13 ms -> max glass 83
-==>    Time for glasses of size 35: 18 ms -> max glass 96
-==>    Time for glasses of size 36: 22 ms -> max glass 95
-==>    Time for glasses of size 37: 30 ms -> max glass 108
-==>    Time for glasses of size 38: 32 ms -> max glass 99
-==>    Time for glasses of size 39: 48 ms -> max glass 108
-==>    Time for glasses of size 40: 54 ms -> max glass 113
-==>    Time for glasses of size 41: 73 ms -> max glass 127
-==>    Time for glasses of size 42: 82 ms -> max glass 105
-==>    Time for glasses of size 43: 115 ms -> max glass 146
-==>    Time for glasses of size 44: 139 ms -> max glass 146
-==>    Time for glasses of size 45: 177 ms -> max glass 131
-==>    Time for glasses of size 46: 203 ms -> max glass 150
-==>    Time for glasses of size 47: 297 ms -> max glass 150
-==>    Time for glasses of size 48: 330 ms -> max glass 161
-==>    Time for glasses of size 49: 396 ms -> max glass 144
+==>    Time for glasses of size 33: 15 ms -> max glass 90
+==>    Time for glasses of size 34: 14 ms -> max glass 83
+==>    Time for glasses of size 35: 20 ms -> max glass 96
+==>    Time for glasses of size 36: 24 ms -> max glass 95
+==>    Time for glasses of size 37: 32 ms -> max glass 108
+==>    Time for glasses of size 38: 34 ms -> max glass 99
+==>    Time for glasses of size 39: 51 ms -> max glass 108
+==>    Time for glasses of size 40: 57 ms -> max glass 113
+==>    Time for glasses of size 41: 78 ms -> max glass 127
+==>    Time for glasses of size 42: 86 ms -> max glass 105
+==>    Time for glasses of size 43: 122 ms -> max glass 146
+==>    Time for glasses of size 44: 145 ms -> max glass 146
+==>    Time for glasses of size 45: 183 ms -> max glass 131
+==>    Time for glasses of size 46: 208 ms -> max glass 150
+==>    Time for glasses of size 47: 309 ms -> max glass 150
+==>    Time for glasses of size 48: 344 ms -> max glass 161
+==>    Time for glasses of size 49: 410 ms -> max glass 144
 max_square_for_glass square: 2 max_square_for_glass: 1
 max_square_for_glass square: 3 max_square_for_glass: 1
 max_square_for_glass square: 4 max_square_for_glass: 2
@@ -301,583 +301,136 @@ max_square_for_glass square: 252 max_square_for_glass: 202
 max_square_for_glass square: 253 max_square_for_glass: 203
 max_square_for_glass square: 254 max_square_for_glass: 204
 max_square_for_glass square: 255 max_square_for_glass: 205
-1 start 0
-Work units: 0
-1 queueempty 12
-2 start 12
-Work units: 0
-2 queueempty 25
-3 start 25
-Work units: 0
-3 queueempty 38
-4 start 38
-Work units: 0
-4 queueempty 50
-5 start 50
-Work units: 0
-5 queueempty 63
-6 start 63
-Work units: 0
-6 queueempty 75
-7 start 75
-Work units: 0
-7 queueempty 88
-8 start 88
-Work units: 0
-8 queueempty 101
-9 start 101
-Work units: 0
-9 queueempty 113
-10 start 113
-Work units: 0
-10 queueempty 126
-11 start 126
-Work units: 0
-11 queueempty 139
-12 start 139
-Work units: 0
-12 queueempty 151
-13 start 151
-Work units: 0
-13 queueempty 164
-14 start 164
-Work units: 0
-14 queueempty 177
-15 start 177
-Work units: 0
-15 queueempty 189
-16 start 189
-Work units: 0
-16 queueempty 200
-17 start 200
-Work units: 0
-17 queueempty 212
-18 start 212
-Work units: 0
-18 queueempty 224
-19 start 224
-Work units: 0
-19 queueempty 236
-20 start 236
-Work units: 0
-20 queueempty 249
-21 start 249
-Work units: 0
-21 queueempty 260
-22 start 260
-Work units: 0
-22 queueempty 273
-23 start 273
-Work units: 1
-23 queueempty 285
-24 start 285
-23 end 298 -> 25
-Work units: 3
-24 queueempty 298
-25 start 298
-24 end 311 -> 25
-Work units: 6
-25 queueempty 311
-26 start 311
-25 end 324 -> 25
-Work units: 8
-26 queueempty 324
-27 start 324
-26 end 337 -> 26
-Work units: 13
-27 queueempty 337
-28 start 337
-27 end 350 -> 26
-Work units: 17
-28 queueempty 351
-29 start 351
-28 end 363 -> 25
-Work units: 22
-29 queueempty 363
-30 start 363
-29 end 376 -> 25
-Work units: 31
-30 queueempty 377
-31 start 377
-30 end 390 -> 26
-Work units: 35
-31 queueempty 391
-32 start 391
-31 end 403 -> 26
-Work units: 44
-32 queueempty 405
-33 start 405
-32 end 416 -> 25
-Work units: 52
-33 queueempty 417
-34 start 417
-33 end 429 -> 23
-Work units: 62
-34 queueempty 430
-35 start 430
-34 end 441 -> 24
-Work units: 70
-35 queueempty 443
-36 start 443
-35 end 456 -> 26
-Work units: 82
-36 queueempty 458
-37 start 458
-36 end 471 -> 28
-Work units: 87
-37 queueempty 473
-38 start 473
-37 end 485 -> 26
-Work units: 99
-38 queueempty 488
-39 start 488
-38 end 500 -> 26
-Work units: 105
-39 queueempty 502
-40 start 502
-39 end 514 -> 26
-Work units: 117
-40 queueempty 517
-41 start 517
-40 end 530 -> 27
-Work units: 125
-41 queueempty 532
-42 start 532
-41 end 545 -> 27
-Work units: 143
-42 queueempty 548
-43 start 548
-42 end 559 -> 26
-Work units: 149
-43 queueempty 565
-44 start 565
-43 end 577 -> 28
-Work units: 165
-44 queueempty 581
-45 start 581
-44 end 594 -> 28
-Work units: 173
-45 queueempty 597
-46 start 598
-45 end 610 -> 29
-Work units: 189
-46 queueempty 614
-47 start 614
-46 end 625 -> 27
-Work units: 197
-47 queueempty 629
-48 start 629
-47 end 643 -> 28
-Work units: 218
-48 queueempty 649
-49 start 649
-48 end 661 -> 32
-Work units: 225
-49 queueempty 667
-50 start 667
-49 end 679 -> 29
-Work units: 245
-50 queueempty 685
-51 start 685
-50 end 698 -> 31
-Work units: 253
-51 queueempty 703
-52 start 704
-51 end 714 -> 29
-Work units: 274
-52 queueempty 725
-53 start 725
-52 end 737 -> 33
-Work units: 285
-53 queueempty 748
-54 start 748
-53 end 760 -> 35
-Work units: 307
-54 queueempty 770
-55 start 770
-54 end 781 -> 33
-Work units: 314
-55 queueempty 795
-56 start 795
-55 end 808 -> 38
-Work units: 335
-56 queueempty 820
-57 start 820
-56 end 832 -> 37
-Work units: 346
-57 queueempty 844
-58 start 844
-57 end 857 -> 37
-Work units: 369
-58 queueempty 869
-59 start 869
-58 end 882 -> 37
-Work units: 380
-59 queueempty 890
-60 start 890
-59 end 903 -> 33
-Work units: 404
-60 queueempty 914
-61 start 914
-60 end 927 -> 37
-Work units: 415
-61 queueempty 938
-62 start 938
-61 end 951 -> 36
-Work units: 441
-62 queueempty 964
-63 start 964
-62 end 977 -> 38
-Work units: 449
-63 queueempty 991
-64 start 991
-63 end 1004 -> 39
-Work units: 475
-64 queueempty 1020
-65 start 1020
-64 end 1033 -> 41
-Work units: 486
-65 queueempty 1051
-66 start 1051
-65 end 1064 -> 43
-Work units: 515
-66 queueempty 1079
-67 start 1079
-66 end 1092 -> 41
-Work units: 526
-67 queueempty 1107
-68 start 1107
-67 end 1120 -> 40
-Work units: 556
-68 queueempty 1139
-69 start 1139
-68 end 1152 -> 44
-Work units: 566
-69 queueempty 1171
-70 start 1171
-69 end 1184 -> 44
-Work units: 598
-70 queueempty 1206
-71 start 1206
-70 end 1219 -> 47
-Work units: 607
-71 queueempty 1248
-72 start 1248
-71 end 1260 -> 54
-Work units: 637
-72 queueempty 1292
-73 start 1292
-72 end 1305 -> 57
-Work units: 648
-73 queueempty 1343
-74 start 1343
-73 end 1356 -> 63
-Work units: 680
-74 queueempty 1403
-75 start 1403
-74 end 1416 -> 72
-Work units: 692
-75 queueempty 1466
-76 start 1466
-75 end 1479 -> 76
-Work units: 726
-76 queueempty 1537
-77 start 1537
-76 end 1550 -> 83
-Work units: 739
-77 queueempty 1619
-78 start 1619
-77 end 1631 -> 94
-Work units: 775
-78 queueempty 1715
-79 start 1715
-78 end 1726 -> 107
-Work units: 789
-79 queueempty 1824
-80 start 1824
-79 end 1837 -> 121
-Work units: 825
-80 queueempty 1953
-81 start 1953
-80 end 1966 -> 141
-Work units: 840
-81 queueempty 2100
-82 start 2100
-81 end 2113 -> 160
-Work units: 876
-82 queueempty 2273
-83 start 2273
-Work units: 889
-82 end 2288 -> 187
-83 queueempty 2530
-84 start 2530
-83 end 2543 -> 269
-Work units: 927
-84 queueempty 2768
-85 start 2768
-Work units: 941
-84 end 2793 -> 263
-85 queueempty 3040
-86 start 3040
-Work units: 982
-85 end 3055 -> 287
-86 queueempty 3363
-87 start 3363
-Work units: 997
-86 end 3382 -> 342
-87 queueempty 3738
-88 start 3738
-Work units: 1040
-87 end 3880 -> 516
-88 queueempty 4189
-89 start 4189
-Work units: 1057
-89 queueempty 4689
-90 start 4689
-Work units: 1101
-88 end 4706 -> 968
-89 end 5191 -> 1002
-90 queueempty 5285
-91 start 5285
-Work units: 1116
-91 queueempty 5965
-92 start 5965
-Work units: 1157
-92 queueempty 6825
-93 start 6825
-90 end 6837 -> 2147
-91 end 6837 -> 1552
-Work units: 1174
-93 queueempty 7746
-94 start 7746
-Work units: 1218
-92 end 8058 -> 2092
-94 queueempty 8929
-95 start 8929
-Work units: 1236
-93 end 9440 -> 2615
-95 queueempty 10286
-96 start 10286
-Work units: 1282
-94 end 10476 -> 2729
-95 end 11708 -> 2778
-96 queueempty 11885
-97 start 11885
-Work units: 1301
-97 queueempty 13688
-98 start 13688
-Work units: 1349
-96 end 14386 -> 4100
-97 end 15498 -> 3613
-98 queueempty 16028
-99 start 16028
-Work units: 1368
-98 end 18623 -> 4934
-99 queueempty 18795
-100 start 18795
-Work units: 1418
-99 end 21721 -> 5692
-100 queueempty 21881
-101 start 21881
-Work units: 1437
-100 end 24506 -> 5711
-101 queueempty 25320
-102 start 25320
-Work units: 1486
-101 end 28033 -> 6152
-102 queueempty 29445
-103 start 29445
-Work units: 1506
-102 end 33312 -> 7992
-103 queueempty 34316
-104 start 34316
-Work units: 1558
-103 end 36672 -> 7227
-104 queueempty 40146
-105 start 40146
-Work units: 1580
-104 end 43645 -> 9328
-105 queueempty 46773
-106 start 46773
-Work units: 1634
-105 end 50000 -> 9854
-106 queueempty 54608
-107 start 54608
-Work units: 1658
-106 end 58390 -> 11617
-107 queueempty 63785
-108 start 63785
-Work units: 1714
-107 end 67100 -> 12491
-108 queueempty 74418
-109 start 74418
-Work units: 1737
-108 end 80099 -> 16314
-109 queueempty 86435
-110 start 86435
-Work units: 1791
-109 end 88805 -> 14387
-110 queueempty 100884
-111 start 100884
-Work units: 1813
-110 end 107233 -> 20798
-111 queueempty 117755
-112 start 117755
-Work units: 1869
-111 end 122915 -> 22030
-112 queueempty 137190
-113 start 137190
-Work units: 1892
-112 end 142261 -> 24506
-113 queueempty 158520
-114 start 158520
-Work units: 1950
-113 end 164222 -> 27032
-114 queueempty 183813
-115 start 183813
-Work units: 1973
-114 end 192044 -> 33524
-115 queueempty 214254
-116 start 214254
-Work units: 2033
-115 end 219691 -> 35877
-116 queueempty 248798
-117 start 248798
-Work units: 2058
-116 end 255575 -> 41320
-117 queueempty 288764
-118 start 288764
-Work units: 2119
-117 end 293710 -> 44912
-118 queueempty 334719
-119 start 334719
-Work units: 2143
-118 end 346502 -> 57737
-119 queueempty 389609
-120 start 389609
-Work units: 2205
-119 end 395743 -> 61023
-120 queueempty 455575
-121 start 455575
-Work units: 2229
-120 end 467501 -> 77892
-121 queueempty 528206
-122 start 528206
-Work units: 2291
-121 end 536213 -> 80638
-122 queueempty 612869
-123 start 612869
-Work units: 2317
-122 end 627299 -> 99093
-123 queueempty 712577
-124 start 712577
-Work units: 2380
-123 end 724877 -> 112008
-124 queueempty 827220
-125 start 827220
-Work units: 2405
-124 end 839613 -> 127036
-125 queueempty 958350
-126 start 958350
-Work units: 2469
-125 end 980760 -> 153539
-126 queueempty 1111341
-127 start 1111341
-Work units: 2495
-126 end 1128804 -> 170454
-127 queueempty 1290711
-128 start 1290711
-Work units: 2562
-127 end 1309776 -> 198434
-128 queueempty 1498303
-129 start 1498303
-Work units: 2588
-128 end 1518601 -> 227889
-129 queueempty 1737554
-130 start 1737554
-Work units: 2657
-129 end 1769761 -> 271458
-130 queueempty 2019951
-131 start 2019951
-Work units: 2682
-130 end 2143632 -> 406078
-131 queueempty 2342333
-132 start 2342333
-Work units: 2749
-131 end 2365753 -> 345801
-132 queueempty 2716714
-133 start 2716714
-Work units: 2773
-132 end 2743323 -> 400990
-133 queueempty 3130324
-134 start 3130324
-Work units: 2842
-133 end 3158473 -> 441758
-134 queueempty 3616196
-135 start 3616196
-Work units: 2867
-134 end 3656990 -> 526666
-135 queueempty 4204017
-136 start 4204017
-Work units: 2938
-135 end 4279484 -> 663288
-136 queueempty 4859170
-137 start 4859170
-Work units: 2964
-136 end 4903964 -> 699946
-137 queueempty 5593785
-138 start 5593785
-Work units: 3036
-137 end 5640580 -> 781410
-138 queueempty 6467586
-139 start 6467586
-Work units: 3065
-138 end 6533369 -> 939584
-139 queueempty 7473759
-140 start 7473759
-Work units: 3141
-139 end 7526300 -> 1058713
-140 queueempty 8650593
-141 start 8650593
-Work units: 3170
-140 end 8858430 -> 1384671
-141 queueempty 9982424
-142 start 9982424
-Work units: 3248
-141 end 10049063 -> 1398470
-142 queueempty 11495595
-143 start 11495595
-Work units: 3278
-142 end 11582870 -> 1600445
-143 queueempty 13291488
-144 start 13291488
-Work units: 3358
-143 end 13397176 -> 1901580
-144 queueempty 15373781
-145 start 15373781
-Work units: 3389
-144 end 15480167 -> 2188679
-145 queueempty 17701042
-146 start 17701042
-Work units: 3470
-145 end 18153692 -> 2779910
-146 queueempty 20384257
-147 start 20384257
-Work units: 3501
-146 end 20492092 -> 2791049
-147 queueempty 23525834
-148 start 23525834
-Work units: 3580
-147 end 23682817 -> 3298559
-148 queueempty 27099071
-149 start 27099071
-Work units: 3610
-148 end 27244528 -> 3718694
-149 queueempty 31142788
-150 start 31142788
-Work units: 3691
-149 end 31289064 -> 4189992
-150 queueempty 35950867
-150 end 36055056 -> 4912267
-36057188
-Squares (total): 6256164700624
+will work on 20 threads
+9 start at 21 ms
+8 start at 21 ms
+11 start at 24 ms
+10 start at 24 ms
+12 start at 24 ms
+13 start at 42 ms
+  8 end, placed squares:        784443 ongoing_threads: 19 -> spent           46
+14 start at 104 ms
+15 start at 196 ms
+ 10 end, placed squares:      38313766 ongoing_threads: 19 -> spent         4646
+ 11 end, placed squares:     136204689 ongoing_threads: 19 -> spent        15985
+16 start at 13149 ms
+ 12 end, placed squares:     191027246 ongoing_threads: 19 -> spent        21634
+ 13 end, placed squares:     717183389 ongoing_threads: 19 -> spent        85158
+  9 end, placed squares:     739345959 ongoing_threads: 19 -> spent        94608
+ 14 end, placed squares:    1952220893 ongoing_threads: 19 -> spent       248338
+17 start at 53647 ms
+18 start at 80390 ms
+ 15 end, placed squares:    3549106347 ongoing_threads: 19 -> spent       447803
+ 16 end, placed squares:    4653433142 ongoing_threads: 19 -> spent       569498
+19 start at 143574 ms
+20 start at 143574 ms
+ 17 end, placed squares:    9101194836 ongoing_threads: 19 -> spent      1108040
+21 start at 397096 ms
+ 18 end, placed squares:   15529836199 ongoing_threads: 19 -> spent      1838154
+22 start at 602445 ms
+23 start at 606319 ms
+ 20 end, placed squares:   26265111570 ongoing_threads: 19 -> spent      3186059
+24 start at 1399788 ms
+ 21 end, placed squares:   40478112891 ongoing_threads: 19 -> spent      4807233
+25 start at 1431273 ms
+ 22 end, placed squares:   56273142555 ongoing_threads: 19 -> spent      6788876
+ 23 end, placed squares:   75325711389 ongoing_threads: 19 -> spent      9155315
+ 19 end, placed squares:   21791274555 ongoing_threads: 19 -> spent      2706629
+26 start at 2481770 ms
+27 start at 2502696 ms
+28 start at 2522907 ms
+ 24 end, placed squares:   77159529926 ongoing_threads: 19 -> spent      9157034
+ 25 end, placed squares:  105206072680 ongoing_threads: 19 -> spent     12652995
+29 start at 4864730 ms
+32 start at 4864731 ms
+30 start at 4864741 ms
+ 26 end, placed squares:  115489160134 ongoing_threads: 19 -> spent     13672327
+31 start at 7677967 ms
+ 27 end, placed squares:  142987554286 ongoing_threads: 19 -> spent     17322233
+33 start at 7711991 ms
+ 28 end, placed squares:  163210346646 ongoing_threads: 19 -> spent     19576004
+34 start at 9009256 ms
+ 32 end, placed squares:  210986368951 ongoing_threads: 19 -> spent     24984179
+35 start at 9891195 ms
+36 start at 10871276 ms
+38 start at 12762183 ms
+40 start at 12898321 ms
+39 start at 12902409 ms
+37 start at 12903753 ms
+ 30 end, placed squares:  182994842662 ongoing_threads: 19 -> spent     22166053
+ 33 end, placed squares:  211664248699 ongoing_threads: 19 -> spent     26330314
+42 start at 20035642 ms
+ 39 end, placed squares:  242521908104 ongoing_threads: 19 -> spent     28636344
+41 start at 20548877 ms
+ 36 end, placed squares:  188726597419 ongoing_threads: 19 -> spent     22812661
+43 start at 20803649 ms
+ 37 end, placed squares:  220960957099 ongoing_threads: 19 -> spent     26461133
+ 34 end, placed squares:  204102397914 ongoing_threads: 19 -> spent     24666491
+ 29 end, placed squares:  193766489693 ongoing_threads: 19 -> spent     23134594
+ 31 end, placed squares:  220321358006 ongoing_threads: 19 -> spent     26533071
+44 start at 21413260 ms
+ 35 end, placed squares:  203137224285 ongoing_threads: 19 -> spent     24254422
+ 38 end, placed squares:  223930186172 ongoing_threads: 19 -> spent     26913497
+45 start at 23157083 ms
+ 40 end, placed squares:  257094905586 ongoing_threads: 19 -> spent     31327013
+ 42 end, placed squares:  258632780706 ongoing_threads: 19 -> spent     31532857
+ 44 end, placed squares:  236197439319 ongoing_threads: 19 -> spent     29510304
+46 start at 24842595 ms
+47 start at 28023145 ms
+48 start at 29327742 ms
+ 46 end, placed squares:  183087593539 ongoing_threads: 19 -> spent     22804944
+49 start at 29883521 ms
+ 43 end, placed squares:  266602551132 ongoing_threads: 19 -> spent     32493164
+52 start at 30542130 ms
+50 start at 30872355 ms
+51 start at 31042135 ms
+ 41 end, placed squares:  279812662037 ongoing_threads: 19 -> spent     34116899
+ 48 end, placed squares:  139150216904 ongoing_threads: 19 -> spent     17059318
+ 47 end, placed squares:  184858043966 ongoing_threads: 19 -> spent     22907282
+ 45 end, placed squares:  219043301291 ongoing_threads: 19 -> spent     27439750
+53 start at 32949741 ms
+ 52 end, placed squares:   85224331912 ongoing_threads: 19 -> spent     10430158
+54 start at 33699656 ms
+ 50 end, placed squares:  123156828052 ongoing_threads: 19 -> spent     14961012
+ 49 end, placed squares:  135609612475 ongoing_threads: 19 -> spent     17099953
+55 start at 34469761 ms
+56 start at 34669143 ms
+58 start at 34687136 ms
+57 start at 34866318 ms
+59 start at 34896809 ms
+60 start at 34902062 ms
+ 58 end, placed squares:     137174826 ongoing_threads: 19 -> spent        13687
+61 start at 34905103 ms
+63 start at 34905105 ms
+ 59 end, placed squares:      29451969 ongoing_threads: 19 -> spent         2247
+66 start at 34905613 ms
+64 start at 34905614 ms
+62 start at 34905615 ms
+ 63 end, placed squares:        339129 ongoing_threads: 19 -> spent           21
+ 64 end, placed squares:        129818 ongoing_threads: 19 -> spent            6
+65 start at 34905665 ms
+ 66 end, placed squares:          4115 ongoing_threads: 19 -> spent            0
+ 62 end, placed squares:        681652 ongoing_threads: 19 -> spent           37
+68 start at 34905710 ms
+67 start at 34905710 ms
+69 start at 34905711 ms
+ 68 end, placed squares:           237 ongoing_threads: 19 -> spent            0
+ 61 end, placed squares:       1296976 ongoing_threads: 19 -> spent           77
+72 start at 34905774 ms
+70 start at 34905775 ms
+71 start at 34905776 ms
+ 69 end, placed squares:           144 ongoing_threads: 19 -> spent            0
+ 57 end, placed squares:     674527994 ongoing_threads: 19 -> spent        74241
+ 70 end, placed squares:           112 ongoing_threads: 19 -> spent            0
+74 start at 34910023 ms
+ 67 end, placed squares:           430 ongoing_threads: 19 -> spent            0
+73 start at 34910023 ms
+ 72 end, placed squares:           100 ongoing_threads: 19 -> spent            0
+ 74 end, placed squares:            96 ongoing_threads: 19 -> spent            0
+75 start at 34910025 ms
+ 71 end, placed squares:           102 ongoing_threads: 19 -> spent            0
+ 65 end, placed squares:         34348 ongoing_threads: 19 -> spent            1
+ 73 end, placed squares:            98 ongoing_threads: 19 -> spent            0
+150 to 150 squares: 5655984567436, total wall-clock time: 34910027
+Squares (total): 5655984567436
+cargo run --release  342752.82s user 268.24s system 982% cpu 9:41:52.72 total

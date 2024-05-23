@@ -1,12 +1,13 @@
 use std::collections::HashSet;
 use std::fmt::{Debug, Display};
-use std::ops::{Add, AddAssign, Mul, MulAssign, Sub, SubAssign};
-use std::mem;
+use std::sync::mpsc::{Sender};
+use crate::coordinator::Message;
 
 pub type Integer = i32;
 
 #[derive(Clone)]
 pub struct Config {
+    pub send : Option<Sender<Message>>,
     pub squares: [bool; 256],
     pub size: Integer,
     pub first_corner: Integer,
@@ -17,7 +18,7 @@ pub struct Config {
 }
 
 impl Config{
-    pub fn new(size: Integer, max_glass: [i32; 256], max_square_for_glass: [i32; 256]) -> Self {
+    pub fn new(send : Option<Sender<Message>>, size: Integer, max_glass: [i32; 256], max_square_for_glass: [i32; 256]) -> Self {
         let mut s = [false; 256];
         let mut p = Vec::with_capacity(30);
         //First plate: height size + 1, width 1
@@ -27,6 +28,7 @@ impl Config{
         //Third plate: height size + 1, width 1
         p.push(Plate{height: size + 1, width: 1});
         Self {
+            send: send.clone(),
             squares: s,
             size: size,
             first_corner: 0,
@@ -257,7 +259,7 @@ impl Debug for Square {
     }
 }
 
-#[derive(Clone)]
+#[derive(Copy, Clone)]
 pub struct Plate {
     pub height: Integer,
     pub width: Integer,
