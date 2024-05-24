@@ -2,24 +2,25 @@ use std::collections::HashSet;
 use std::fmt::{Debug, Display};
 use std::sync::mpsc::{Sender};
 use crate::coordinator::Message;
+use crate::CONFIG_SIZE;
 
 pub type Integer = i32;
 
 #[derive(Clone)]
 pub struct Config {
     pub send : Option<Sender<Message>>,
-    pub squares: [bool; 256],
+    pub squares: [bool; CONFIG_SIZE],
     pub size: Integer,
     pub first_corner: Integer,
     pub plates: Vec<Plate>,
     pub net_squares: u128,
-    pub max_glass: [i32; 256],
-    pub max_square_for_glass: [i32; 256]
+    pub max_glass: [i32; CONFIG_SIZE],
+    pub max_square_for_glass: [i32; CONFIG_SIZE]
 }
 
 impl Config{
-    pub fn new(send : Option<Sender<Message>>, size: Integer, max_glass: [i32; 256], max_square_for_glass: [i32; 256]) -> Self {
-        let mut s = [false; 256];
+    pub fn new(send : Option<Sender<Message>>, size: Integer, max_glass: [i32; CONFIG_SIZE], max_square_for_glass: [i32; CONFIG_SIZE]) -> Self {
+        let mut s = [false; CONFIG_SIZE];
         let mut p = Vec::with_capacity(30);
         //First plate: height size + 1, width 1
         p.push(Plate{height: size + 1, width: 1});
@@ -159,7 +160,7 @@ impl Config{
     pub fn print_squares(&self) -> () {
         let mut s = String::new();
         s += "{";
-        for i in 0..256 {
+        for i in 0..CONFIG_SIZE {
             if self.squares[i] {
                 s += &i.to_string();
                 s += ", ";
@@ -175,7 +176,7 @@ impl Config{
     pub fn squares_to_string(&self) -> String {
         let mut s = String::new();
         s += "{";
-        for i in 0..256 {
+        for i in 0..CONFIG_SIZE {
             if self.squares[i] {
                 s += &i.to_string();
                 s += ", ";
@@ -193,7 +194,7 @@ impl Config{
 
     pub fn order(&self) -> usize {
         let mut order = 0;
-        for i in 0..256{
+        for i in 0..CONFIG_SIZE{
             if self.squares[i]{
                 order += 1;
             }
@@ -205,7 +206,7 @@ impl Config{
 impl Debug for Config{
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut squares_out : String = "{".to_string();
-        for i in 0..256 {
+        for i in 0..CONFIG_SIZE {
             if self.squares[i] {
                 squares_out += &i.to_string();
                 squares_out += ", ";
@@ -226,7 +227,7 @@ impl Debug for Config{
 impl Display for Config{
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         let mut squares_out : String = "{".to_string();
-        for i in 0..256 {
+        for i in 0..CONFIG_SIZE {
             if self.squares[i] {
                 squares_out += &i.to_string();
                 squares_out += ", ";

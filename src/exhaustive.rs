@@ -5,24 +5,25 @@ use std::io::Write;
 
 //import config
 use crate::squares::Config;
+use crate::CONFIG_SIZE;
 use std::fs::{File};
 
-pub fn solve_cc(send : &Sender<Message>, first: Integer, size: Integer, max_glass: [i32; 256], max_square_for_glass: [i32; 256]) ->(){
+pub fn solve_cc(send : &Sender<Message>, first: Integer, size: Integer, max_glass: [i32; CONFIG_SIZE], max_square_for_glass: [i32; CONFIG_SIZE]) ->(){
     //println!{"Solving for size: {}", size};
     let mut config = Config::new(Some(send.clone()), size, max_glass, max_square_for_glass); //Creates the necessary starting plate.
     //println!("Config: {:?}", config);
     double_nest_init(send, first, &mut config);
  }
 
-pub fn solve_glasses(max_glass: usize) -> [i32; 256] {
+pub fn solve_glasses(max_glass: usize) -> [i32; CONFIG_SIZE] {
     let mut check_glass_size: i32 = 0;
-    let mut max_glass_precalc: [i32; 256] = [0; 256];
+    let mut max_glass_precalc: [i32; CONFIG_SIZE] = [0; CONFIG_SIZE];
     for glass in 1..max_glass {
         let start = std::time::Instant::now();
         check_glass_size = glass as i32;
-        let mut config = Config::new(None::<Sender<Message>>, 256, max_glass_precalc, max_glass_precalc);
+        let mut config = Config::new(None::<Sender<Message>>, CONFIG_SIZE as Integer, max_glass_precalc, max_glass_precalc);
         config.plates[1].width = glass as i32;
-        config.plates[2].width = (256 - glass) as i32;
+        config.plates[2].width = (CONFIG_SIZE - glass) as i32;
         config.net_squares = 2;
         decompose_glasses(&mut config, 1, check_glass_size, &mut max_glass_precalc);
         let finish = std::time::Instant::now();
@@ -30,8 +31,8 @@ pub fn solve_glasses(max_glass: usize) -> [i32; 256] {
             glass, (finish - start).as_millis(), max_glass_precalc[glass]);
     }
 
-    for glass in max_glass..256 {
-        max_glass_precalc[glass] = 256;
+    for glass in max_glass..CONFIG_SIZE {
+        max_glass_precalc[glass] = CONFIG_SIZE as Integer;
     }
 
     return max_glass_precalc;
@@ -133,7 +134,7 @@ fn next_plate(config: &mut Config) -> () { //find smallest delimited plate, and 
     }
 }
 
-fn next_plate_for_glasses(config: &mut Config, check_glass_size: Integer, max_glass_precalc: &mut [i32; 256]) -> () { //find smallest delimited plate, and decompose it
+fn next_plate_for_glasses(config: &mut Config, check_glass_size: Integer, max_glass_precalc: &mut [i32; CONFIG_SIZE]) -> () { //find smallest delimited plate, and decompose it
     let mut l_min : Integer = config.size + Integer::from(1); //equiv to infinity
     let mut p_min_i : usize = 0;
     //find the minimum delimited plate
@@ -150,7 +151,7 @@ fn next_plate_for_glasses(config: &mut Config, check_glass_size: Integer, max_gl
 
     decompose_glasses(config, p_min_i, check_glass_size, max_glass_precalc);
 }
-pub fn decompose_glasses(mut config: &mut Config, plate_id: usize, check_glass_size: Integer, mut max_glass_precalc: &mut [i32; 256]) -> () { 
+pub fn decompose_glasses(mut config: &mut Config, plate_id: usize, check_glass_size: Integer, mut max_glass_precalc: &mut [i32; CONFIG_SIZE]) -> () { 
     //given a plate, decompose it by adding squares, then select the next plate if the plates change
     // if filling the plate with a square does not make the height greater than the size, add the square and then next plate
     // println!("decomposing, config: {}, plate_id: {}, net_squares: {}", config, plate_id, config.net_squares);
@@ -172,25 +173,24 @@ pub fn decompose_glasses(mut config: &mut Config, plate_id: usize, check_glass_s
         }
     } 
 
-    if config.can_use(config.plates[plate_id].width) && 
-       config.plates[plate_id].height + config.plates[plate_id].width <= config.size
-        // &&  
-    //    (if plate_id == config.plates.len()-2 {config.plates[plate_id].width >= 5} else {true})
-       {
+    let square = config.plates[plate_id].width;
+    if config.can_use(square) && 
+       config.plates[plate_id].height + square <= config.size {
         config.net_squares += 1;
         //eprintln!("a+ {}", config);
-        
-        let mut config_backup = config.clone();
-        config.vertical_extension(plate_id);
+        let orig_left_plate_width = config.plates[plate_id - 1].width;
+        let new_plate_id = config.vertical_extension(plate_id);
         //println!("{:?}", config);
         next_plate_for_glasses(&mut config, check_glass_size, max_glass_precalc);
         //undo it
-        config_backup.net_squares = config.net_squares;
-        // println!("v-");
-        *config = config_backup;
-        
-    }
-    else{
+        if new_plate_id == plate_id {
+            // we were potentially merging with right plate only
+            config.reverse_vertical_extension(plate_id, square, 0);
+        } else {
+            // we were mergeing with left plate and potentially with right plate
+            config.reverse_vertical_extension(new_plate_id, square, orig_left_plate_width);
+        }  
+    } else{
         ////eprintln!("a.");
     }
     // if the height separating the plate from the one to it's left is less than the length, extend the left plate horizontally by adding the square
@@ -198,26 +198,18 @@ pub fn decompose_glasses(mut config: &mut Config, plate_id: usize, check_glass_s
        config.plates[plate_id].width && config.can_use(config.plates[plate_id - 1].height - config.plates[plate_id].height) {
         config.net_squares += 1;
         //eprintln!("b+ {}", config);
-        //let mut config_backup = config.clone();
 
         config.horizontal_extension(plate_id);
         //println!("{:?}", config);
         decompose_glasses(config, plate_id, check_glass_size, max_glass_precalc);
         //remove the square
         config.reverse_horizontal_extension(plate_id);
-        //config_backup.net_squares = config.net_squares;
-        //*config = config_backup;
-        //eprintln!("b- {}", config);
-
     }
 
     for s in 1..(std::cmp::min(config.plates[plate_id].width - 1, config.size - config.plates[plate_id].height)+1) {
         // if the square can be added to the bottom left corner, add it and then decompose the new plate)
         if config.can_use(s) && s != config.plates[plate_id-1].height - config.plates[plate_id].height{
             config.net_squares += 1;
-            //print number of plates:        
-            //let mut config_backup = config.clone();
-
             config.add_square_quick(s, plate_id);
             //println!("{:?}", config);
             next_plate_for_glasses(&mut config, check_glass_size, max_glass_precalc);
@@ -282,14 +274,6 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                 plate_id == last_plate_id { // last plate
                 // println!("bottom line: SKIP vertical bottom right: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
         // } 
-        // else if plate_id==1 &&                                                  // first plate
-        //      h + square == config.size &&     // touches the ceiling
-        //      square < config.first_corner  {                                // smaller than the first 
-                // println!("bottom line: SKIP vertical top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
-            // } else if plate_id==1 &&                                                  // first plate
-            //  h + square < config.size &&       // not touching ceiling
-            //  config.size - h - square < config.first_corner { // not leaving enough space
-            //     println!("bottom line: SKIP vertical left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
             } else if plate_id >= 2 && 
                 is_unfillable_glass(config, plate_id, 
                     config.plates[plate_id-2].height - lh, 
@@ -348,8 +332,7 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                 //         println!("bottom line: SKIP horizontal top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, square, config, config.net_squares);
                     } else {
 
-            config.net_squares += 1;
-                //let mut config_backup = config.clone();
+                config.net_squares += 1;
 
                 config.horizontal_extension(plate_id);
                 //println!("{:?}", config);
@@ -389,11 +372,6 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
         // if the square can be added to the bottom left corner, add it and then decompose the new plate)
         if config.can_use(s) && 
            s != lh - h {
-            // if plate_id == 1 && config.size - s <= config.first_corner   { //s < config.first_corner{
-                // if s > 2 {
-                    // println!("SKIP custom TOP LEFT square {}: plate_id: {}, first: {}, space_left_after_s: {}, config: {}, net_squares: {}", 
-                    //     s, plate_id, config.first_corner, config.size - s, config, config.net_squares);
-                // }
 
             if plate_id > 1 && 
                 is_unfillable_glass(config, plate_id, 
@@ -416,12 +394,6 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                 // println!("bottom line: SKIP custom top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, s, config, config.net_squares);
             } else {
 
-            // if we are trying to put the square in the bottom right corner, it must be greater than the first corner
-            // if h == 0  &&  // bottom line
-            // w - s <= config.first_corner && // leaving enough space for the square bigger than the first corner
-            // plate_id == last_plate_id      // the last plate on the row
-            // {
-            // } else {
                     config.net_squares += 1;
                     config.add_square_quick(s, plate_id);
 
@@ -440,13 +412,6 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                         config.plates[last_plate_id+1].height = config.size+1;
                         config.plates.insert(last_plate_id+1, Plate{height: 0, width: removed_w});
                         // println!("COMPACT AFTER  for first: {}, size: {}, config: {}", config.first_corner, config.size, config);
-                        
-
-                        // let next_plate_to_go = next_plane_id(&mut cloned);
-                        // println!("CLONED for size: {}, plate_id: {}, config: {}", cloned.size, next_plate_to_go, cloned);
-                        // config.send.as_ref().expect("already_checked").send(Message::WorkUnit((cloned, next_plate_to_go))).unwrap();
-                        
-                    
                     }
 
                     //println!("{:?}", config);
@@ -460,7 +425,6 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                     // next_plate(&mut config);
                     config.remove_square(plate_id);
                     //println!("{} checked", s);
-            // }
                 }
         }
         else{

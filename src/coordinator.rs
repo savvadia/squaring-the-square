@@ -8,6 +8,7 @@ use crate::squares::*;
 use std::fs::File;
 use std::io::Write;
 use num_cpus;
+use crate::CONFIG_SIZE;
 
 #[derive(Debug)]
 pub enum Message {
@@ -15,7 +16,7 @@ pub enum Message {
     WorkUnit((Config, usize)),
 }
 
-pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass: &[i32; 256], max_square_for_glass: &[i32; 256]) -> u128{
+pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass: &[i32; CONFIG_SIZE], max_square_for_glass: &[i32; CONFIG_SIZE]) -> u128{
     let start = std::time::Instant::now();
     let mut size = min_size;
     let mut total_squares = 0;
@@ -31,7 +32,7 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass:
     let mut no_of_threads_done_per_first : Vec<Integer>  = vec![0; max_size as usize];
     let mut squares_placed_per_first : Vec<u128> = vec![0; max_size as usize];
     let mut time_spent_per_first : Vec<u128>  = vec![0; max_size as usize];
-    let mut size_start_time: [std::time::Instant; 256] = [std::time::Instant::now(); 256]; // Initialize with default values
+    let mut size_start_time: [std::time::Instant; CONFIG_SIZE] = [std::time::Instant::now(); CONFIG_SIZE]; // Initialize with default values
 
     //queue:
     let mut queue: Vec<(Config, usize)> = Vec::new();
@@ -162,7 +163,7 @@ pub fn coordinator_continuous(min_size : Integer, max_size : Integer, max_glass:
     total_squares
 }
 
-pub fn SingleSizeCoordinator(size : Integer, max_glass: &[i32; 256], max_square_for_glass: &[i32; 256]) -> u128 {
+pub fn SingleSizeCoordinator(size : Integer, max_glass: &[i32; CONFIG_SIZE], max_square_for_glass: &[i32; CONFIG_SIZE]) -> u128 {
 
     let start = std::time::Instant::now();
     let (to_coord, rcv_coord) = channel();
