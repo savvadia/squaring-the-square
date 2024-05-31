@@ -367,7 +367,6 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
         max = std::cmp::min(max, config.max_square_for_glass[w as usize] + 1);
     }
 
-    let right_height = rh - h;
     for s in min..max {
         // if the square can be added to the bottom left corner, add it and then decompose the new plate)
         if config.can_use(s) && 
@@ -405,6 +404,11 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                         config.plates[0].height = config.size+1;
                         config.plates[last_plate_id+1].height = config.size+1;
                         // println!("COMPACT READY  for first: {}, size: {}->{}, config: {}", config.first_corner, config.size + removed_w, config.size, config);
+                        // if lw < s {
+                        //     decompose(config, plate_id - 1);
+                        // } else {
+                        //     decompose(config, plate_id);
+                        // }
                         next_plate(&mut config);
 
                         config.size += removed_w;
@@ -415,14 +419,11 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                     }
 
                     //println!("{:?}", config);
-                    let next_plate_to_go = next_plane_id(config);
                     if plate_id > 1 && s > lh-h && lw < w - s && config.plates[plate_id - 2].height > lh {
                         decompose(config, plate_id - 1);
                     } else {
                         decompose(config, plate_id + 1); 
                     }
-
-                    // next_plate(&mut config);
                     config.remove_square(plate_id);
                     //println!("{} checked", s);
                 }

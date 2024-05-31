@@ -19,34 +19,34 @@
 ==>    Time for glasses of size 19: 0 ms -> max glass 40
 ==>    Time for glasses of size 20: 0 ms -> max glass 40
 ==>    Time for glasses of size 21: 0 ms -> max glass 47
-==>    Time for glasses of size 22: 0 ms -> max glass 46
+==>    Time for glasses of size 22: 1 ms -> max glass 46
 ==>    Time for glasses of size 23: 1 ms -> max glass 61
 ==>    Time for glasses of size 24: 1 ms -> max glass 51
-==>    Time for glasses of size 25: 2 ms -> max glass 73
+==>    Time for glasses of size 25: 1 ms -> max glass 73
 ==>    Time for glasses of size 26: 2 ms -> max glass 56
-==>    Time for glasses of size 27: 3 ms -> max glass 63
+==>    Time for glasses of size 27: 4 ms -> max glass 63
 ==>    Time for glasses of size 28: 3 ms -> max glass 63
-==>    Time for glasses of size 29: 4 ms -> max glass 71
-==>    Time for glasses of size 30: 4 ms -> max glass 71
-==>    Time for glasses of size 31: 6 ms -> max glass 83
+==>    Time for glasses of size 29: 5 ms -> max glass 71
+==>    Time for glasses of size 30: 5 ms -> max glass 71
+==>    Time for glasses of size 31: 7 ms -> max glass 83
 ==>    Time for glasses of size 32: 7 ms -> max glass 83
 ==>    Time for glasses of size 33: 10 ms -> max glass 90
 ==>    Time for glasses of size 34: 8 ms -> max glass 83
-==>    Time for glasses of size 35: 12 ms -> max glass 96
-==>    Time for glasses of size 36: 14 ms -> max glass 95
-==>    Time for glasses of size 37: 18 ms -> max glass 108
+==>    Time for glasses of size 35: 11 ms -> max glass 96
+==>    Time for glasses of size 36: 12 ms -> max glass 95
+==>    Time for glasses of size 37: 16 ms -> max glass 108
 ==>    Time for glasses of size 38: 18 ms -> max glass 99
-==>    Time for glasses of size 39: 28 ms -> max glass 108
-==>    Time for glasses of size 40: 31 ms -> max glass 113
-==>    Time for glasses of size 41: 42 ms -> max glass 127
+==>    Time for glasses of size 39: 27 ms -> max glass 108
+==>    Time for glasses of size 40: 30 ms -> max glass 113
+==>    Time for glasses of size 41: 41 ms -> max glass 127
 ==>    Time for glasses of size 42: 46 ms -> max glass 105
 ==>    Time for glasses of size 43: 66 ms -> max glass 136
-==>    Time for glasses of size 44: 79 ms -> max glass 145
+==>    Time for glasses of size 44: 78 ms -> max glass 145
 ==>    Time for glasses of size 45: 101 ms -> max glass 131
-==>    Time for glasses of size 46: 114 ms -> max glass 146
+==>    Time for glasses of size 46: 113 ms -> max glass 146
 ==>    Time for glasses of size 47: 169 ms -> max glass 147
 ==>    Time for glasses of size 48: 189 ms -> max glass 147
-==>    Time for glasses of size 49: 229 ms -> max glass 138
+==>    Time for glasses of size 49: 227 ms -> max glass 138
 max_square_for_glass square: 2 max_square_for_glass: 1
 max_square_for_glass square: 3 max_square_for_glass: 1
 max_square_for_glass square: 4 max_square_for_glass: 2
@@ -197,137 +197,136 @@ max_square_for_glass square: 148 max_square_for_glass: 108
 max_square_for_glass square: 149 max_square_for_glass: 109
 max_square_for_glass square: 150 max_square_for_glass: 110
 will work on 20 threads
-8 start at 18 ms
+8 start at 19 ms
 9 start at 19 ms
-10 start at 20 ms
-11 start at 20 ms
-14 start at 31 ms
-  8 end, placed squares:        784443 ongoing_threads: 19 -> spent           37
-12 start at 1082 ms
-13 start at 1109 ms
- 10 end, placed squares:      38313766 ongoing_threads: 19 -> spent         4028
-18 start at 11262 ms
- 11 end, placed squares:     136204689 ongoing_threads: 19 -> spent        15669
- 12 end, placed squares:     191027246 ongoing_threads: 19 -> spent        20482
-16 start at 14190 ms
-17 start at 19002 ms
-15 start at 19002 ms
- 13 end, placed squares:     717183389 ongoing_threads: 19 -> spent        87566
-  9 end, placed squares:     739345959 ongoing_threads: 19 -> spent        93556
- 14 end, placed squares:    1952220893 ongoing_threads: 19 -> spent       248411
-19 start at 105125 ms
- 15 end, placed squares:    3549106347 ongoing_threads: 19 -> spent       439064
- 16 end, placed squares:    4653433142 ongoing_threads: 19 -> spent       562988
-21 start at 292689 ms
- 17 end, placed squares:    9101194836 ongoing_threads: 19 -> spent      1082769
-20 start at 349521 ms
- 18 end, placed squares:   15529836199 ongoing_threads: 19 -> spent      1920071
-22 start at 445068 ms
- 19 end, placed squares:   21791274555 ongoing_threads: 19 -> spent      2701569
-23 start at 776815 ms
-25 start at 1431192 ms
-24 start at 1433144 ms
- 20 end, placed squares:   26265111570 ongoing_threads: 19 -> spent      3149635
- 21 end, placed squares:   40478112891 ongoing_threads: 19 -> spent      4877321
-27 start at 1676364 ms
- 23 end, placed squares:   75325711389 ongoing_threads: 19 -> spent      8994116
-26 start at 2338117 ms
-28 start at 2341105 ms
- 25 end, placed squares:  105206072680 ongoing_threads: 19 -> spent     12337356
-30 start at 3624720 ms
- 26 end, placed squares:  115489160134 ongoing_threads: 19 -> spent     13779604
-31 start at 5129575 ms
-32 start at 7133195 ms
- 28 end, placed squares:  163210346646 ongoing_threads: 19 -> spent     20058155
-29 start at 7654738 ms
-33 start at 7877561 ms
-34 start at 9324761 ms
- 27 end, placed squares:  142987554286 ongoing_threads: 19 -> spent     17317918
-37 start at 10536211 ms
- 22 end, placed squares:   56273142555 ongoing_threads: 19 -> spent      6791016
- 24 end, placed squares:   77159529926 ongoing_threads: 19 -> spent      9245797
- 32 end, placed squares:  210986368951 ongoing_threads: 19 -> spent     25661911
-36 start at 12625539 ms
- 33 end, placed squares:  211664248699 ongoing_threads: 19 -> spent     25942016
-35 start at 12865111 ms
- 37 end, placed squares:  220960957099 ongoing_threads: 19 -> spent     27476112
- 31 end, placed squares:  220321358006 ongoing_threads: 19 -> spent     26577457
- 30 end, placed squares:  182994842662 ongoing_threads: 19 -> spent     22056694
-38 start at 13883301 ms
- 34 end, placed squares:  204102397914 ongoing_threads: 19 -> spent     24769536
- 29 end, placed squares:  193766489693 ongoing_threads: 19 -> spent     23550955
-40 start at 17146899 ms
-39 start at 17147378 ms
-41 start at 17215626 ms
- 35 end, placed squares:  203137224285 ongoing_threads: 19 -> spent     24354992
- 38 end, placed squares:  223930186172 ongoing_threads: 19 -> spent     26766817
- 36 end, placed squares:  188726597419 ongoing_threads: 19 -> spent     22710642
-42 start at 19704077 ms
-43 start at 19865297 ms
- 41 end, placed squares:  279812662037 ongoing_threads: 19 -> spent     34134320
-44 start at 22189271 ms
- 40 end, placed squares:  257094905586 ongoing_threads: 19 -> spent     30947373
-45 start at 24986677 ms
- 39 end, placed squares:  242521908104 ongoing_threads: 19 -> spent     29565157
-47 start at 27186298 ms
-48 start at 27408449 ms
- 42 end, placed squares:  258632780706 ongoing_threads: 19 -> spent     31383815
- 44 end, placed squares:  236197439319 ongoing_threads: 19 -> spent     28583573
- 43 end, placed squares:  266602551132 ongoing_threads: 19 -> spent     32391107
-49 start at 29205946 ms
-50 start at 29362611 ms
-46 start at 29728595 ms
- 45 end, placed squares:  219043301291 ongoing_threads: 19 -> spent     26272817
-51 start at 30542635 ms
- 47 end, placed squares:  184858043966 ongoing_threads: 19 -> spent     22015455
- 46 end, placed squares:  183087593539 ongoing_threads: 19 -> spent     22563749
- 48 end, placed squares:  139150216904 ongoing_threads: 19 -> spent     17143935
-53 start at 33180536 ms
-54 start at 33662496 ms
- 49 end, placed squares:  135609612475 ongoing_threads: 19 -> spent     16387300
- 50 end, placed squares:  123156828052 ongoing_threads: 19 -> spent     15402058
-52 start at 33770554 ms
-56 start at 33789139 ms
-55 start at 33855208 ms
- 51 end, placed squares:  104162659294 ongoing_threads: 19 -> spent     12973808
-57 start at 34311666 ms
- 56 end, placed squares:   10484274333 ongoing_threads: 19 -> spent      1102124
-58 start at 34646281 ms
-59 start at 34700530 ms
- 57 end, placed squares:     674527994 ongoing_threads: 19 -> spent        70082
- 58 end, placed squares:     137174826 ongoing_threads: 19 -> spent        12549
-60 start at 34702197 ms
- 59 end, placed squares:      29451969 ongoing_threads: 19 -> spent         2048
-61 start at 34703045 ms
-62 start at 34703047 ms
-63 start at 34703084 ms
- 61 end, placed squares:       1296976 ongoing_threads: 19 -> spent           77
- 62 end, placed squares:        681652 ongoing_threads: 19 -> spent           41
-64 start at 34703185 ms
-65 start at 34703186 ms
- 63 end, placed squares:        339129 ongoing_threads: 19 -> spent           21
- 65 end, placed squares:         34348 ongoing_threads: 19 -> spent            1
-66 start at 34703216 ms
-67 start at 34703216 ms
+10 start at 23 ms
+12 start at 23 ms
+  8 end, placed squares:        784443 ongoing_threads: 19 -> spent           25
+11 start at 75 ms
+13 start at 81 ms
+15 start at 173 ms
+16 start at 1679 ms
+14 start at 1679 ms
+ 10 end, placed squares:      38313766 ongoing_threads: 19 -> spent         3998
+ 12 end, placed squares:     191027246 ongoing_threads: 19 -> spent        19265
+ 13 end, placed squares:     717183389 ongoing_threads: 19 -> spent        75403
+17 start at 32507 ms
+ 11 end, placed squares:     136204689 ongoing_threads: 19 -> spent        12109
+  9 end, placed squares:     739345959 ongoing_threads: 19 -> spent        82819
+ 14 end, placed squares:    1952220893 ongoing_threads: 19 -> spent       212136
+18 start at 80023 ms
+ 15 end, placed squares:    3549106347 ongoing_threads: 19 -> spent       381098
+19 start at 132854 ms
+ 16 end, placed squares:    4653433142 ongoing_threads: 19 -> spent       523486
+ 17 end, placed squares:    9101194836 ongoing_threads: 19 -> spent      1026587
+20 start at 231384 ms
+21 start at 264322 ms
+22 start at 310673 ms
+ 18 end, placed squares:   15529836199 ongoing_threads: 19 -> spent      1714196
+ 19 end, placed squares:   21791274555 ongoing_threads: 19 -> spent      2517749
+23 start at 911639 ms
+ 20 end, placed squares:   26265111570 ongoing_threads: 19 -> spent      2872889
+25 start at 940976 ms
+24 start at 940977 ms
+ 22 end, placed squares:   56273142555 ongoing_threads: 19 -> spent      6094280
+26 start at 1480080 ms
+ 21 end, placed squares:   40478112891 ongoing_threads: 19 -> spent      4354670
+27 start at 2842796 ms
+28 start at 3010495 ms
+29 start at 3058929 ms
+ 25 end, placed squares:  105206072680 ongoing_threads: 19 -> spent     11326987
+ 26 end, placed squares:  115489160134 ongoing_threads: 19 -> spent     12320348
+ 24 end, placed squares:   77159529926 ongoing_threads: 19 -> spent      8536172
+ 28 end, placed squares:  163210346646 ongoing_threads: 19 -> spent     17243898
+ 23 end, placed squares:   75325711389 ongoing_threads: 19 -> spent      8060590
+ 27 end, placed squares:  142987554286 ongoing_threads: 19 -> spent     15468619
+30 start at 5429191 ms
+31 start at 6026109 ms
+ 29 end, placed squares:  193766489693 ongoing_threads: 19 -> spent     20400772
+32 start at 7643805 ms
+34 start at 7643805 ms
+35 start at 7643805 ms
+36 start at 7652468 ms
+ 31 end, placed squares:  220321358006 ongoing_threads: 19 -> spent     23231243
+33 start at 10266312 ms
+39 start at 12068300 ms
+45 start at 12250526 ms
+43 start at 12250526 ms
+40 start at 12951241 ms
+38 start at 13947879 ms
+42 start at 14267127 ms
+41 start at 14272532 ms
+44 start at 17783483 ms
+ 43 end, placed squares:  266602551132 ongoing_threads: 19 -> spent     29186505
+46 start at 20066293 ms
+37 start at 20066297 ms
+ 38 end, placed squares:  223930186172 ongoing_threads: 19 -> spent     24298395
+ 34 end, placed squares:  204102397914 ongoing_threads: 19 -> spent     22132165
+ 39 end, placed squares:  242521908104 ongoing_threads: 19 -> spent     26185619
+ 35 end, placed squares:  203137224285 ongoing_threads: 19 -> spent     21620980
+ 45 end, placed squares:  219043301291 ongoing_threads: 19 -> spent     23953588
+ 44 end, placed squares:  236197439319 ongoing_threads: 19 -> spent     25309661
+47 start at 23022537 ms
+ 37 end, placed squares:  220960957099 ongoing_threads: 19 -> spent     23291405
+48 start at 25197553 ms
+49 start at 25582612 ms
+ 46 end, placed squares:  183087593539 ongoing_threads: 19 -> spent     19564417
+ 40 end, placed squares:  257094905586 ongoing_threads: 19 -> spent     27899785
+ 48 end, placed squares:  139150216904 ongoing_threads: 19 -> spent     15409635
+ 42 end, placed squares:  258632780706 ongoing_threads: 19 -> spent     28215771
+51 start at 28395252 ms
+50 start at 28400844 ms
+ 33 end, placed squares:  211664248699 ongoing_threads: 19 -> spent     22477895
+ 49 end, placed squares:  135609612475 ongoing_threads: 19 -> spent     15083700
+ 32 end, placed squares:  210986368951 ongoing_threads: 19 -> spent     22844859
+ 47 end, placed squares:  184858043966 ongoing_threads: 19 -> spent     20014495
+ 30 end, placed squares:  182994842662 ongoing_threads: 19 -> spent     19636303
+ 36 end, placed squares:  188726597419 ongoing_threads: 19 -> spent     20116615
+53 start at 29536647 ms
+52 start at 29618015 ms
+ 51 end, placed squares:  104162659294 ongoing_threads: 19 -> spent     10978346
+ 41 end, placed squares:  279812662037 ongoing_threads: 19 -> spent     30656642
+54 start at 30028320 ms
+ 50 end, placed squares:  123156828052 ongoing_threads: 19 -> spent     13867110
+55 start at 30488669 ms
+57 start at 30752879 ms
+56 start at 30773204 ms
+ 57 end, placed squares:     674527994 ongoing_threads: 19 -> spent        63374
+58 start at 30878753 ms
+59 start at 30885466 ms
+ 58 end, placed squares:     137174826 ongoing_threads: 19 -> spent        11565
+ 59 end, placed squares:      29451969 ongoing_threads: 19 -> spent         2043
+60 start at 30902182 ms
+61 start at 30905582 ms
+63 start at 30905582 ms
+62 start at 30905635 ms
+64 start at 30905705 ms
+ 63 end, placed squares:        339129 ongoing_threads: 19 -> spent           17
+ 61 end, placed squares:       1296976 ongoing_threads: 19 -> spent           72
+66 start at 30905800 ms
+ 62 end, placed squares:        681652 ongoing_threads: 19 -> spent           34
  64 end, placed squares:        129818 ongoing_threads: 19 -> spent            6
-68 start at 34703226 ms
+65 start at 30905847 ms
+67 start at 30905847 ms
  66 end, placed squares:          4115 ongoing_threads: 19 -> spent            0
+69 start at 30905851 ms
  67 end, placed squares:           430 ongoing_threads: 19 -> spent            0
-69 start at 34708225 ms
-71 start at 34708227 ms
- 68 end, placed squares:           237 ongoing_threads: 19 -> spent            0
+ 65 end, placed squares:         34348 ongoing_threads: 19 -> spent            1
+68 start at 30905855 ms
+70 start at 30905855 ms
  69 end, placed squares:           144 ongoing_threads: 19 -> spent            0
-70 start at 34708229 ms
+71 start at 30905857 ms
+ 68 end, placed squares:           237 ongoing_threads: 19 -> spent            0
  71 end, placed squares:           102 ongoing_threads: 19 -> spent            0
-72 start at 34708230 ms
+72 start at 30906130 ms
  70 end, placed squares:           112 ongoing_threads: 19 -> spent            0
-74 start at 34708232 ms
  72 end, placed squares:           100 ongoing_threads: 19 -> spent            0
-75 start at 34708233 ms
-73 start at 34708235 ms
+74 start at 30906132 ms
+73 start at 30906132 ms
+ 73 end, placed squares:            98 ongoing_threads: 19 -> spent            0
+75 start at 30906134 ms
  74 end, placed squares:            96 ongoing_threads: 19 -> spent            0
  75 end, placed squares:            96 ongoing_threads: 19 -> spent            0
- 73 end, placed squares:            98 ongoing_threads: 19 -> spent            0
-150 to 150 squares: 5641670111623, total wall-clock time: 34708237
-Squares (total): 5641670111623 in 34708240 ms
-cargo run --release  340214.59s user 276.78s system 980% cpu 9:38:30.03 total
+150 to 150 squares: 5653306155768, total wall-clock time: 30906136
+Squares (total): 5653306155768 in 30906139 ms
+cargo run --release  303993.03s user 241.80s system 984% cpu 8:35:06.95 total
