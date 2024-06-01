@@ -358,45 +358,28 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
     let mut max = std::cmp::min(w - 1, config.size - h)+1;
 
     // after adding a new square, we might get a new glass on the right
-    let right_height = rh - h;
-    if h > 0 && right_height >= w {
-        // if config.max_square_for_glass[glass_width as usize] + 1 < max && glass_width > 5 {
-            // println!("SKIP GLASS custom glass {}-{}: plate_id: {}, glass width: {}, right_height: {}, max_for_glass: {}, config: {}, net_squares: {}", 
-            //     config.max_square_for_glass[glass_width as usize]+1, max-1, plate_id, glass_width, right_height, config.max_square_for_glass[glass_width as usize], config, config.net_squares);
-        // }
-        max = std::cmp::min(max, config.max_square_for_glass[w as usize] + 1);
-    }
-
-    for s in min..max {
-        // if the square can be added to the bottom left corner, add it and then decompose the new plate)
-        if config.can_use(s) && 
-           s != lh - h {
-
-            if plate_id > 1 && 
-                is_unfillable_glass(config, plate_id, 
-                    config.plates[plate_id-2].height - lh, 
-                    lw,
-                    h + s - lh) {
-        
-            } else if h > 0 && 
-                is_unfillable_glass(config, plate_id, 
-                    s,
-                    w - s,
-                    rh - h) {
-
-            } else  if h == 0  && plate_id == last_plate_id && s < config.first_corner && w - s <= config.first_corner {
-                // the right bottom corner should be bigger than the first corner
-            } 
-            else if plate_id == 1 &&                                                  // first plate
-                 h + s >= config.size - config.first_corner &&     // top square
-                 s < config.first_corner  {                                // smaller than the first 
-                // println!("bottom line: SKIP custom top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, s, config, config.net_squares);
-            } else {
-
+    if h == 0 {
+        for s in min..max {
+            // if the square can be added to the bottom left corner, add it and then decompose the new plate)
+            if config.can_use(s) && s != lh - h {
+    
+                if plate_id > 1 && 
+                    is_unfillable_glass(config, plate_id, 
+                        config.plates[plate_id-2].height - lh, 
+                        lw,
+                        h + s - lh) {
+                } else  if plate_id == last_plate_id && s < config.first_corner && w - s <= config.first_corner {
+                    // the right bottom corner should be bigger than the first corner
+                } 
+                else if plate_id == 1 &&                                                  // first plate
+                     h + s >= config.size - config.first_corner &&     // top square
+                     s < config.first_corner  {                                // smaller than the first 
+                    // println!("bottom line: SKIP custom top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, s, config, config.net_squares);
+                } else {
                     config.net_squares += 1;
                     config.add_square_quick(s, plate_id);
 
-                    if h == 0 && s > config.first_corner && config.send.is_some() {
+                    if s > config.first_corner && config.send.is_some() {
                         let removed_w = w-s;
                         // println!("COMPACT BEFORE for first: {}, size: {}, config: {}", config.first_corner, config.size, config);
                         config.size -= removed_w;
@@ -404,13 +387,8 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                         config.plates[0].height = config.size+1;
                         config.plates[last_plate_id+1].height = config.size+1;
                         // println!("COMPACT READY  for first: {}, size: {}->{}, config: {}", config.first_corner, config.size + removed_w, config.size, config);
-                        // if lw < s {
-                        //     decompose(config, plate_id - 1);
-                        // } else {
-                        //     decompose(config, plate_id);
-                        // }
                         next_plate(&mut config);
-
+                        
                         config.size += removed_w;
                         config.plates[0].height = config.size+1;
                         config.plates[last_plate_id+1].height = config.size+1;
@@ -427,12 +405,54 @@ pub fn decompose(mut config: &mut Config, plate_id: usize) -> () { //given a pla
                     config.remove_square(plate_id);
                     //println!("{} checked", s);
                 }
+            }
         }
-        else{
-            ////eprintln!("{} is not a valid square size", s)
-            // println!("min_for_corner={} ", min_for_corner);        
+    } else {
+        let right_height = rh - h;
+        if right_height >= w {
+            // if config.max_square_for_glass[glass_width as usize] + 1 < max && glass_width > 5 {
+                // println!("SKIP GLASS custom glass {}-{}: plate_id: {}, glass width: {}, right_height: {}, max_for_glass: {}, config: {}, net_squares: {}", 
+                //     config.max_square_for_glass[glass_width as usize]+1, max-1, plate_id, glass_width, right_height, config.max_square_for_glass[glass_width as usize], config, config.net_squares);
+            // }
+            max = std::cmp::min(max, config.max_square_for_glass[w as usize] + 1);
+        }
+        for s in min..max {
+            // if the square can be added to the bottom left corner, add it and then decompose the new plate)
+            if config.can_use(s) && s != lh - h {
+
+                if plate_id > 1 && 
+                    is_unfillable_glass(config, plate_id, 
+                        config.plates[plate_id-2].height - lh, 
+                        lw,
+                        h + s - lh) {
+                } else if is_unfillable_glass(config, plate_id, 
+                        s,
+                        w - s,
+                        rh - h) {
+    
+                } else if plate_id == 1 &&                                                  // first plate
+                     h + s >= config.size - config.first_corner &&     // top square
+                     s < config.first_corner  {                                // smaller than the first 
+                    // println!("bottom line: SKIP custom top-left: plate_id: {} width/square: {}, config: {}, net_squares: {}", plate_id, s, config, config.net_squares);
+                } else {
+    
+                        config.net_squares += 1;
+                        config.add_square_quick(s, plate_id);
+    
+                        if plate_id > 1 && s > lh-h && lw < w - s && config.plates[plate_id - 2].height > lh {
+                            decompose(config, plate_id - 1);
+                        } else {
+                            decompose(config, plate_id + 1); 
+                        }
+                        config.remove_square(plate_id);
+                        //println!("{} checked", s);
+                    }
+            }
         }
     }
+    
+
+
 
 }
 
